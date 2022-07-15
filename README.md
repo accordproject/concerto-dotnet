@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://www.accordproject.org/projects/concerto">
-    Concerto in C#
+    Concerto for .NET
   <a/>
 </h1>
 
@@ -12,7 +12,7 @@
 
 ## Introduction
 
-This is a prototype implementation of the [Concerto Schema Language](https://docs.accordproject.org/docs/model-concerto.html) in C#. The current [reference implementation](https://github.com/accordproject/concerto) is written in JavaScript.
+This is a prototype implementation of the [Concerto Schema Language](https://docs.accordproject.org/docs/model-concerto.html) for .NET written in C#. The current [reference implementation](https://github.com/accordproject/concerto) is written in JavaScript.
 
 This repository contains:
 - Serialization and Deserialization utilities for `System.Text.Json` and `Newtonsoft.Json`.
