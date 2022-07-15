@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertoJsonConverter", "ConcertoJsonConverter\ConcertoJsonConverter.csproj", "{DA36B37E-07C3-4239-A9F7-316DA4CBAC1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertoJsonConverter.Tests", "ConcertoJsonConverter.Tests\ConcertoJsonConverter.Tests.csproj", "{2AA3CBBF-9F40-4164-9F23-F34F8E845C87}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA36B37E-07C3-4239-A9F7-316DA4CBAC1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA36B37E-07C3-4239-A9F7-316DA4CBAC1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA36B37E-07C3-4239-A9F7-316DA4CBAC1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA36B37E-07C3-4239-A9F7-316DA4CBAC1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AA3CBBF-9F40-4164-9F23-F34F8E845C87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AA3CBBF-9F40-4164-9F23-F34F8E845C87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AA3CBBF-9F40-4164-9F23-F34F8E845C87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AA3CBBF-9F40-4164-9F23-F34F8E845C87}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {075DCC2A-74C0-4CAA-80D1-27E13A20B169}
+	EndGlobalSection
+EndGlobal

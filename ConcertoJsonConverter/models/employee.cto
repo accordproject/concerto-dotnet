@@ -1,0 +1,24 @@
+namespace org.test
+
+abstract participant Person {
+    o String email
+    o String firstName
+    o String lastName
+}
+
+enum Department {
+    o MARKETING
+    o SALES
+    o ENGINEERING
+    o OPERATIONS
+}
+
+participant Employee identified by employeeId extends Person  {
+    o Department department optional
+    --> Employee manager optional
+    o String employeeId
+}
+
+participant Manager extends Employee  {
+    o Double budget optional
+}
