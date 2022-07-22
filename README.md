@@ -64,7 +64,7 @@ using Concerto.Models.org.test;
 
 > This repository uses statically built versions of the internal `Concerto.Models.concerto` and `Concerto.Models.concerto.metamodel` namespaces. In the future this should be build dynamically using the Concerto CLI. There is an [open branch with the changes needed to `concerto-tools` package](https://github.com/mttrbrts/composer-concerto/blob/mr-csharp-newtonsoft/packages/concerto-tools/lib/codegen/fromcto/csharp/csharpvisitor.js). You can build the C# classes from the Concerto source files (`.cto`) will the following command:
 >
-> `concerto compile --model ./models/concerto.metamodel.cto --model ./models/employee.cto --target csharp --output ./`
+> `concerto compile --model ./models/concerto.metamodel.cto --model ./models/employee.cto --target csharp --output ./ --useSystemTextJson --useNewtonsoftJson`
 
 ## Running Tests
 
