@@ -1,14 +1,13 @@
-name: Build
+name: Publish
 
 on:
-  push:
-  pull_request:
-    branches:
-      - main
+  release:
+    types:
+      - published
 
 jobs:
-  build:
-    name: Build and test
+  publish:
+    name: Build, test and publish
 
     strategy:
       matrix:
@@ -40,5 +39,10 @@ jobs:
         run: |
           dotnet test AccordProject.Concerto.sln --no-restore --verbosity normal
           dotnet test ConcertoJsonConverter.sln --no-restore --verbosity normal
-
+      - name: Pack
+        run: |
+          dotnet pack AccordProject.Concerto.sln --configuration Release --no-restore /p:Version=${{ github.event.release.tag_name }}
+      - name: Nuget Push
+        run: |
+          dotnet nuget push AccordProject.Concerto/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_KEY }}
 
