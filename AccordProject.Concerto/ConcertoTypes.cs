@@ -16,28 +16,33 @@ using System;
 using System.Text.Json.Serialization;
 
 namespace AccordProject.Concerto {
+   [AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Concept")]
    public abstract class Concept {
       [JsonPropertyName("$class")]
 		public virtual string _class { get; } = "concerto@1.0.0.Concept";
    }
+   [AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Asset")]
    public abstract class Asset : Concept {
       [JsonPropertyName("$class")]
 		public override string _class { get; } = "concerto@1.0.0.Asset";
       [JsonPropertyName("$identifier")]
 		public string _identifier { get; set; }
    }
+   [AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Participant")]
    public abstract class Participant : Concept {
       [JsonPropertyName("$class")]
 		public override string _class { get; } = "concerto@1.0.0.Participant";
       [JsonPropertyName("$identifier")]
 		public string _identifier { get; set; }
    }
+   [AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Transaction")]
    public abstract class Transaction : Concept {
       [JsonPropertyName("$class")]
 		public override string _class { get; } = "concerto@1.0.0.Transaction";
       [JsonPropertyName("$timestamp")]
 		public DateTime _timestamp { get; set; }
    }
+   [AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Event")]
    public abstract class Event : Concept {
       [JsonPropertyName("$class")]
 		public override string _class { get; } = "concerto@1.0.0.Event";
