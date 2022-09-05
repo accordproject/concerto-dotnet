@@ -17,7 +17,7 @@ using System;
 namespace AccordProject.Concerto;
 
 [AttributeUsage(AttributeTargets.Class)]
-public class Type : Attribute {
+public class TypeAttribute : Attribute {
     public string Namespace;
     public string? Version;
     public string Name;
