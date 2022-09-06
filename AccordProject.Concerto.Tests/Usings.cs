@@ -12,20 +12,5 @@
  * limitations under the License.
  */
 
-namespace AccordProject.Concerto;
-
-[AttributeUsage(AttributeTargets.Class)]
-public class TypeAttribute : Attribute {
-    public string Namespace;
-    public string? Version;
-    public string Name;
-
-    public ConcertoType ToType()
-    {
-        return new ConcertoType() {
-            Namespace = Namespace,
-            Version = Version,
-            Name = Name
-        };
-    }
-}
+global using Xunit;
+global using ExpectedObjects;
