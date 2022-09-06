@@ -10,4 +10,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
+  <Target Name="Codegen" BeforeTargets="PreBuildEvent">
+    <Exec Command="bash scripts/codegen.sh" />
+  </Target>
+
 </Project>
