@@ -23,6 +23,7 @@ namespace AccordProject.Concerto.Tests {
       public string firstName { get; set; }
       public string lastName { get; set; }
    }
+   [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
    public enum Department {
       MARKETING,
       SALES,

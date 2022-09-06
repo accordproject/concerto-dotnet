@@ -27,4 +27,8 @@
     <ProjectReference Include="..\AccordProject.Concerto\AccordProject.Concerto.csproj" />
   </ItemGroup>
 
+  <Target Name="Codegen" BeforeTargets="PreBuildEvent">
+    <Exec Command="bash scripts/codegen.sh" />
+  </Target>
+
 </Project>

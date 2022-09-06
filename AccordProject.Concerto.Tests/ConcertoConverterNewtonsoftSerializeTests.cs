@@ -25,10 +25,6 @@ public class ConcertoConverterNewtonsoftSerializeTests
     {
         NullValueHandling = NullValueHandling.Ignore,
         ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-        Converters =
-        {
-            new StringEnumConverter(),
-        }
     };
 
     [Fact]

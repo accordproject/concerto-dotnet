@@ -26,10 +26,6 @@ public class ConcertoConverterNewtonsoftMetamodelTests
     {
         NullValueHandling = NullValueHandling.Ignore,
         ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-        Converters =
-        {
-            new StringEnumConverter(),
-        }
     };
 
     [Fact]
