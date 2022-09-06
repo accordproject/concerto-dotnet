@@ -1,0 +1,1032 @@
+{
+  "$class": "concerto.metamodel@1.0.0.Model",
+  "decorators": [],
+  "namespace": "org.accordproject.patent",
+  "imports": [
+    {
+      "$class": "concerto.metamodel@1.0.0.ImportType",
+      "name": "PostalAddress",
+      "namespace": "org.accordproject.address",
+      "uri": "https://models.accordproject.org/address.cto"
+    },
+    {
+      "$class": "concerto.metamodel@1.0.0.ImportType",
+      "name": "Country",
+      "namespace": "org.accordproject.geo",
+      "uri": "https://models.accordproject.org/geo.cto"
+    },
+    {
+      "$class": "concerto.metamodel@1.0.0.ImportType",
+      "name": "GeoCoordinates",
+      "namespace": "org.accordproject.geo",
+      "uri": "https://models.accordproject.org/geo.cto"
+    },
+    {
+      "$class": "concerto.metamodel@1.0.0.ImportType",
+      "name": "Person",
+      "namespace": "org.accordproject.person",
+      "uri": "https://models.accordproject.org/person.cto"
+    },
+    {
+      "$class": "concerto.metamodel@1.0.0.ImportType",
+      "name": "Residency",
+      "namespace": "org.accordproject.usa.residency",
+      "uri": "https://models.accordproject.org/usa/residency.cto"
+    }
+  ],
+  "declarations": [
+    {
+      "$class": "concerto.metamodel@1.0.0.ConceptDeclaration",
+      "name": "PatentAssetIdentifier",
+      "isAbstract": false,
+      "properties": [
+        {
+          "$class": "concerto.metamodel@1.0.0.StringProperty",
+          "name": "assetNumber",
+          "isArray": false,
+          "isOptional": false,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 1286,
+              "line": 32,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 1310,
+              "line": 33,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.ObjectProperty",
+          "name": "numberStatus",
+          "type": {
+            "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+            "name": "AssetNumberStatus"
+          },
+          "isArray": false,
+          "isOptional": false,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 1310,
+              "line": 33,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 1345,
+              "line": 34,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.ObjectProperty",
+          "name": "assetCountry",
+          "type": {
+            "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+            "name": "Country"
+          },
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 1345,
+              "line": 34,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 1378,
+              "line": 35,
+              "column": 1,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        }
+      ],
+      "location": {
+        "$class": "concerto.metamodel@1.0.0.Range",
+        "start": {
+          "offset": 1252,
+          "line": 31,
+          "column": 1,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        },
+        "end": {
+          "offset": 1379,
+          "line": 35,
+          "column": 2,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        }
+      }
+    },
+    {
+      "$class": "concerto.metamodel@1.0.0.ConceptDeclaration",
+      "name": "PatentClassification",
+      "isAbstract": false,
+      "properties": [
+        {
+          "$class": "concerto.metamodel@1.0.0.StringProperty",
+          "name": "classificationSymbol",
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 1444,
+              "line": 40,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 1485,
+              "line": 41,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.StringProperty",
+          "name": "classificationDescription",
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 1485,
+              "line": 41,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 1529,
+              "line": 42,
+              "column": 1,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        }
+      ],
+      "location": {
+        "$class": "concerto.metamodel@1.0.0.Range",
+        "start": {
+          "offset": 1411,
+          "line": 39,
+          "column": 1,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        },
+        "end": {
+          "offset": 1530,
+          "line": 42,
+          "column": 2,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        }
+      }
+    },
+    {
+      "$class": "concerto.metamodel@1.0.0.ParticipantDeclaration",
+      "name": "Inventor",
+      "isAbstract": false,
+      "properties": [
+        {
+          "$class": "concerto.metamodel@1.0.0.ObjectProperty",
+          "name": "residentCountry",
+          "type": {
+            "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+            "name": "Country"
+          },
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 1595,
+              "line": 48,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 1632,
+              "line": 49,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.ObjectProperty",
+          "name": "inventorResidency",
+          "type": {
+            "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+            "name": "Residency"
+          },
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 1632,
+              "line": 49,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 1671,
+              "line": 50,
+              "column": 1,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        }
+      ],
+      "location": {
+        "$class": "concerto.metamodel@1.0.0.Range",
+        "start": {
+          "offset": 1555,
+          "line": 47,
+          "column": 1,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        },
+        "end": {
+          "offset": 1672,
+          "line": 50,
+          "column": 2,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        }
+      },
+      "superType": {
+        "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+        "name": "Person"
+      }
+    },
+    {
+      "$class": "concerto.metamodel@1.0.0.ParticipantDeclaration",
+      "name": "Applicant",
+      "isAbstract": false,
+      "properties": [],
+      "location": {
+        "$class": "concerto.metamodel@1.0.0.Range",
+        "start": {
+          "offset": 1697,
+          "line": 54,
+          "column": 1,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        },
+        "end": {
+          "offset": 1737,
+          "line": 55,
+          "column": 2,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        }
+      },
+      "superType": {
+        "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+        "name": "Person"
+      }
+    },
+    {
+      "$class": "concerto.metamodel@1.0.0.ParticipantDeclaration",
+      "name": "Assignee",
+      "isAbstract": false,
+      "properties": [],
+      "location": {
+        "$class": "concerto.metamodel@1.0.0.Range",
+        "start": {
+          "offset": 1762,
+          "line": 60,
+          "column": 1,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        },
+        "end": {
+          "offset": 1801,
+          "line": 61,
+          "column": 2,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        }
+      },
+      "superType": {
+        "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+        "name": "Person"
+      }
+    },
+    {
+      "$class": "concerto.metamodel@1.0.0.EnumDeclaration",
+      "name": "AssetNumberStatus",
+      "properties": [
+        {
+          "$class": "concerto.metamodel@1.0.0.EnumProperty",
+          "name": "APP",
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 1852,
+              "line": 65,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 1880,
+              "line": 66,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.EnumProperty",
+          "name": "PAT",
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 1880,
+              "line": 66,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 1903,
+              "line": 67,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.EnumProperty",
+          "name": "PUB",
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 1903,
+              "line": 67,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 1932,
+              "line": 68,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.EnumProperty",
+          "name": "REISS",
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 1932,
+              "line": 68,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 1956,
+              "line": 69,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.EnumProperty",
+          "name": "FOR",
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 1956,
+              "line": 69,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 1976,
+              "line": 70,
+              "column": 1,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        }
+      ],
+      "location": {
+        "$class": "concerto.metamodel@1.0.0.Range",
+        "start": {
+          "offset": 1824,
+          "line": 64,
+          "column": 1,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        },
+        "end": {
+          "offset": 1977,
+          "line": 70,
+          "column": 2,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        }
+      }
+    },
+    {
+      "$class": "concerto.metamodel@1.0.0.EnumDeclaration",
+      "name": "ApplicationType",
+      "properties": [
+        {
+          "$class": "concerto.metamodel@1.0.0.EnumProperty",
+          "name": "PROV",
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2024,
+              "line": 74,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2051,
+              "line": 75,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.EnumProperty",
+          "name": "NONPROV",
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2051,
+              "line": 75,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2082,
+              "line": 76,
+              "column": 1,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        }
+      ],
+      "location": {
+        "$class": "concerto.metamodel@1.0.0.Range",
+        "start": {
+          "offset": 1998,
+          "line": 73,
+          "column": 1,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        },
+        "end": {
+          "offset": 2083,
+          "line": 76,
+          "column": 2,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        }
+      }
+    },
+    {
+      "$class": "concerto.metamodel@1.0.0.EnumDeclaration",
+      "name": "SubjectMatter",
+      "properties": [
+        {
+          "$class": "concerto.metamodel@1.0.0.EnumProperty",
+          "name": "UTILITY",
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2125,
+              "line": 79,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2152,
+              "line": 80,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.EnumProperty",
+          "name": "PLANT",
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2152,
+              "line": 80,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2173,
+              "line": 81,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.EnumProperty",
+          "name": "DESIGN",
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2173,
+              "line": 81,
+              "column": 4,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2196,
+              "line": 82,
+              "column": 1,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        }
+      ],
+      "location": {
+        "$class": "concerto.metamodel@1.0.0.Range",
+        "start": {
+          "offset": 2101,
+          "line": 78,
+          "column": 1,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        },
+        "end": {
+          "offset": 2197,
+          "line": 82,
+          "column": 2,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        }
+      }
+    },
+    {
+      "$class": "concerto.metamodel@1.0.0.ConceptDeclaration",
+      "name": "PatentAsset",
+      "isAbstract": false,
+      "properties": [
+        {
+          "$class": "concerto.metamodel@1.0.0.ObjectProperty",
+          "name": "assetIdentifier",
+          "type": {
+            "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+            "name": "PatentAssetIdentifier"
+          },
+          "isArray": true,
+          "isOptional": false,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2263,
+              "line": 87,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2307,
+              "line": 88,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.StringProperty",
+          "name": "title",
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2307,
+              "line": 88,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2333,
+              "line": 89,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.ObjectProperty",
+          "name": "inventorIdentifier",
+          "type": {
+            "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+            "name": "Inventor"
+          },
+          "isArray": true,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2333,
+              "line": 89,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2376,
+              "line": 90,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.ObjectProperty",
+          "name": "applicantIdentifier",
+          "type": {
+            "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+            "name": "Applicant"
+          },
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2376,
+              "line": 90,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2419,
+              "line": 91,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.ObjectProperty",
+          "name": "currentAssignee",
+          "type": {
+            "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+            "name": "Assignee"
+          },
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2419,
+              "line": 91,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2457,
+              "line": 92,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.ObjectProperty",
+          "name": "originalAssignee",
+          "type": {
+            "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+            "name": "Assignee"
+          },
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2457,
+              "line": 92,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2496,
+              "line": 93,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.DateTimeProperty",
+          "name": "priorityDate",
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2496,
+              "line": 93,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2531,
+              "line": 94,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.DateTimeProperty",
+          "name": "filingDate",
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2531,
+              "line": 94,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2564,
+              "line": 95,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.DateTimeProperty",
+          "name": "issueDate",
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2564,
+              "line": 95,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2596,
+              "line": 96,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.DateTimeProperty",
+          "name": "publicationDate",
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2596,
+              "line": 96,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2634,
+              "line": 97,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.ObjectProperty",
+          "name": "classifier",
+          "type": {
+            "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+            "name": "PatentClassification"
+          },
+          "isArray": true,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2634,
+              "line": 97,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2681,
+              "line": 98,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.StringProperty",
+          "name": "attorneyDocketNumber",
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2681,
+              "line": 98,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2722,
+              "line": 99,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.StringProperty",
+          "name": "customerNumber",
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2722,
+              "line": 99,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2757,
+              "line": 100,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.StringProperty",
+          "name": "emailAddress",
+          "isArray": true,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2757,
+              "line": 100,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2792,
+              "line": 101,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.ObjectProperty",
+          "name": "applicationType",
+          "type": {
+            "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+            "name": "ApplicationType"
+          },
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2792,
+              "line": 101,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2837,
+              "line": 102,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.ObjectProperty",
+          "name": "subjectMatter",
+          "type": {
+            "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+            "name": "SubjectMatter"
+          },
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2837,
+              "line": 102,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2878,
+              "line": 103,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.DoubleProperty",
+          "name": "numDrawings",
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2878,
+              "line": 103,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2910,
+              "line": 104,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.DoubleProperty",
+          "name": "pubFigure",
+          "isArray": false,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2910,
+              "line": 104,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2940,
+              "line": 105,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        },
+        {
+          "$class": "concerto.metamodel@1.0.0.ObjectProperty",
+          "name": "priorApplication",
+          "type": {
+            "$class": "concerto.metamodel@1.0.0.TypeIdentifier",
+            "name": "PatentAsset"
+          },
+          "isArray": true,
+          "isOptional": true,
+          "location": {
+            "$class": "concerto.metamodel@1.0.0.Range",
+            "start": {
+              "offset": 2940,
+              "line": 105,
+              "column": 3,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            },
+            "end": {
+              "offset": 2982,
+              "line": 106,
+              "column": 1,
+              "$class": "concerto.metamodel@1.0.0.Position"
+            }
+          }
+        }
+      ],
+      "location": {
+        "$class": "concerto.metamodel@1.0.0.Range",
+        "start": {
+          "offset": 2239,
+          "line": 86,
+          "column": 1,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        },
+        "end": {
+          "offset": 2983,
+          "line": 106,
+          "column": 2,
+          "$class": "concerto.metamodel@1.0.0.Position"
+        }
+      }
+    }
+  ]
+}
