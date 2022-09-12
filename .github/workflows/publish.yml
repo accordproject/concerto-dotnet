@@ -42,6 +42,7 @@ jobs:
       - name: Pack
         run: |
           dotnet pack AccordProject.Concerto.sln --configuration Release --no-restore /p:Version=${{ github.event.release.tag_name }}
+          dotnet pack AccordProject.Concerto.sln --configuration Release --no-restore /p:Version=${{ github.event.release.tag_name }} /p:IncludeSymbols=true /p:SymbolPackageFormat=snupkg
       - name: Nuget Push
         run: |
           dotnet nuget push AccordProject.Concerto/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_KEY }}
