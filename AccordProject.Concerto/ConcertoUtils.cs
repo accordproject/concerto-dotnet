@@ -15,6 +15,21 @@
 /// <summary>
 /// This class represents a Concerto type, for example org.example@1.2.3.Foo.
 /// </summary>
+public struct ConcertoNamespace
+{
+    public string Namespace { get; init; }
+    public string? Version { get; init; }
+
+    public override string ToString()
+    {
+        if (Version != null)
+        {
+            return $"{Namespace}@{Version}";
+        }
+        return Namespace;
+    }
+}
+
 public struct ConcertoType
 {
     public string Namespace { get; init; }
@@ -36,6 +51,31 @@ public struct ConcertoType
 /// </summary>
 public class ConcertoUtils
 {
+    public static ConcertoNamespace ParseNamespace(string ns)
+    {
+        string parsedNamespace;
+        string? parsedVersion;
+        int i = ns.IndexOf("@");
+        if (i != -1)
+        {
+            parsedNamespace = ns[..i];
+            parsedVersion =  ns[(i + 1)..];
+        }
+        else
+        {
+            parsedNamespace = ns;
+        }
+        if (parsedNamespace.Length == 0 || parsedVersion?.Length == 0)
+        {
+            throw new Exception($"Invalid namespace \"{ns}\"");
+        }
+        return new ConcertoNamespace()
+        {
+            Namespace = parsedNamespace,
+            Version = parsedVersion
+        };
+    }
+
     public static ConcertoType ParseType(string fqn)
     {
         int i = fqn.LastIndexOf(".");

@@ -20,6 +20,41 @@ using AccordProject.Concerto;
 public class ConcertoUtilsTests
 {
     [Fact]
+    public void CanParseUnversionedNamespace()
+    {
+        var expected = new ConcertoNamespace() {
+            Namespace = "org.example",
+        }.ToExpectedObject();
+        var actual = ConcertoUtils.ParseNamespace("org.example");
+        expected.ShouldEqual(actual);
+    }
+
+    [Fact]
+    public void CanParseVersionedNamespace()
+    {
+        var expected = new ConcertoNamespace() {
+            Namespace = "org.example",
+            Version = "1.2.3"
+        }.ToExpectedObject();
+        var actual = ConcertoUtils.ParseNamespace("org.example@1.2.3");
+        expected.ShouldEqual(actual);
+    }
+         
+    [Fact]
+    public void CannotParseNamespaceWithEmptyNamespace()
+    {
+        var ex = Assert.Throws<Exception>(() => ConcertoUtils.ParseNamespace(""));
+        Assert.Equal("Invalid namespace \"\"", ex.Message);
+    }
+         
+    [Fact]
+    public void CannotParseNamespaceWithEmptyVersion()
+    {
+        var ex = Assert.Throws<Exception>(() => ConcertoUtils.ParseNamespace("org.example@"));
+        Assert.Equal("Invalid namespace \"org.example@\"", ex.Message);
+    }
+
+    [Fact]
     public void CanParseUnversionedType()
     {
         var expected = new ConcertoType() {
