@@ -54,7 +54,7 @@ public class ConcertoUtils
     public static ConcertoNamespace ParseNamespace(string ns)
     {
         string parsedNamespace;
-        string? parsedVersion;
+        string? parsedVersion = null;
         int i = ns.IndexOf("@");
         if (i != -1)
         {
