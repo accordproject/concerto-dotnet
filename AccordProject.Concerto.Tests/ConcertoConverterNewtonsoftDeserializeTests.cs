@@ -104,7 +104,7 @@ public class ConcertoConverterNewtonsoftDeserializeTests
 
         var ex = Assert.Throws<JsonException>(() => JsonConvert.DeserializeObject<Employee>(jsonString, options));
 
-        Assert.Equal("Only JSON Objects can be deserialized with ConcertoConverterNewtonsoft.", ex.Message);
+        Assert.Equal("Only JSON Objects can be deserialized with ConcertoConverterNewtonsoft, current token is Boolean.", ex.Message);
     }
 
     [Fact]

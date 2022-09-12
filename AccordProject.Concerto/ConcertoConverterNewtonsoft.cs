@@ -36,7 +36,7 @@ public class ConcertoConverterNewtonsoft : JsonConverter
     {
         if (reader.TokenType != JsonToken.StartObject)
         {
-            throw new JsonException("Only JSON Objects can be deserialized with ConcertoConverterNewtonsoft.");
+            throw new JsonException($"Only JSON Objects can be deserialized with ConcertoConverterNewtonsoft, current token is {reader.TokenType}.");
         }
 
         // Peek ahead at the object
