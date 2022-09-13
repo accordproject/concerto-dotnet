@@ -21,12 +21,6 @@ using Newtonsoft.Json.Converters;
 
 public class ConcertoConverterNewtonsoftDeserializeTests
 {
-    JsonSerializerSettings options = new()
-    {
-        NullValueHandling = NullValueHandling.Ignore,
-        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-    };
-
     [Fact]
     public void SimpleObject_Succeeds()
     {
@@ -40,7 +34,7 @@ public class ConcertoConverterNewtonsoftDeserializeTests
             ""$identifier"": ""test@example.com""
         }";
 
-        var employee = JsonConvert.DeserializeObject<Employee>(jsonString, options).ToExpectedObject();
+        var employee = JsonConvert.DeserializeObject<Employee>(jsonString).ToExpectedObject();
 
         employee.ShouldEqual(new Employee()
         {
@@ -67,7 +61,7 @@ public class ConcertoConverterNewtonsoftDeserializeTests
             ""$identifier"": ""test@example.com""
         }";
 
-        Manager employee = (Manager) JsonConvert.DeserializeObject<Employee>(jsonString, options);
+        Manager employee = (Manager) JsonConvert.DeserializeObject<Employee>(jsonString);
         
 
         employee.ToExpectedObject().ShouldEqual(new Manager()
@@ -92,7 +86,7 @@ public class ConcertoConverterNewtonsoftDeserializeTests
             ""$class"": ""org.accordproject.concerto.test@1.2.3.Foo""
         }";
 
-        var ex = Assert.Throws<JsonException>(() => JsonConvert.DeserializeObject<Employee>(jsonString, options));
+        var ex = Assert.Throws<JsonException>(() => JsonConvert.DeserializeObject<Employee>(jsonString));
  
         Assert.Equal("Type definition `org.accordproject.concerto.test@1.2.3.Foo` not found.", ex.Message);
     }
@@ -102,7 +96,7 @@ public class ConcertoConverterNewtonsoftDeserializeTests
     {
         string jsonString = "true";
 
-        var ex = Assert.Throws<JsonException>(() => JsonConvert.DeserializeObject<Employee>(jsonString, options));
+        var ex = Assert.Throws<JsonException>(() => JsonConvert.DeserializeObject<Employee>(jsonString));
 
         Assert.Equal("Only JSON Objects can be deserialized with ConcertoConverterNewtonsoft, current token is Boolean.", ex.Message);
     }
@@ -119,7 +113,7 @@ public class ConcertoConverterNewtonsoftDeserializeTests
             ""$identifier"": ""test@example.com""
         }";
 
-        var ex = Assert.Throws<JsonException>(() => JsonConvert.DeserializeObject<Employee>(jsonString, options));
+        var ex = Assert.Throws<JsonException>(() => JsonConvert.DeserializeObject<Employee>(jsonString));
  
         Assert.Equal("JSON Object is missing `$class` property.", ex.Message);
     }
@@ -146,7 +140,7 @@ public class ConcertoConverterNewtonsoftDeserializeTests
             ""$identifier"": ""test@example.com""
         }";
 
-        var employee = JsonConvert.DeserializeObject<Employee>(jsonStringWithManager, options).ToExpectedObject();
+        var employee = JsonConvert.DeserializeObject<Employee>(jsonStringWithManager).ToExpectedObject();
         
         employee.ShouldEqual(new Employee()
         {
@@ -175,7 +169,7 @@ public class ConcertoConverterNewtonsoftDeserializeTests
     //        // TODO
     //     }";
 
-    //      var ex = Assert.Throws<JsonException>(() => JsonConvert.DeserializeObject<Employee>(jsonString, options));
+    //      var ex = Assert.Throws<JsonException>(() => JsonConvert.DeserializeObject<Employee>(jsonString));
  
     //     Assert.Equal("JSON Object is missing `$class` property.", ex.Message);
 

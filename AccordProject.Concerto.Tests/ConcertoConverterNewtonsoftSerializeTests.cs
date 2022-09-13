@@ -21,12 +21,6 @@ using Newtonsoft.Json.Converters;
 
 public class ConcertoConverterNewtonsoftSerializeTests
 {
-    JsonSerializerSettings options = new()
-    {
-        NullValueHandling = NullValueHandling.Ignore,
-        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-    };
-
     [Fact]
     public void SimpleObject()
     {
@@ -40,11 +34,12 @@ public class ConcertoConverterNewtonsoftSerializeTests
             employeeId = "123"
         };
 
-        string jsonString = JsonConvert.SerializeObject(employee, options);
+        string jsonString = JsonConvert.SerializeObject(employee);
 
         Assert.Equal(Regex.Replace(@"{
             ""$class"": ""org.accordproject.concerto.test@1.2.3.Employee"",
             ""department"": ""ENGINEERING"",
+            ""manager"": null,
             ""employeeId"": ""123"",
             ""email"": ""test@example.com"",
             ""firstName"": ""Matt"",
@@ -72,16 +67,19 @@ public class ConcertoConverterNewtonsoftSerializeTests
             }
         };
 
-        string jsonString = JsonConvert.SerializeObject(employee, options);
+        string jsonString = JsonConvert.SerializeObject(employee);
         Assert.Equal(Regex.Replace(@"{
             ""$class"": ""org.accordproject.concerto.test@1.2.3.Employee"",
             ""department"": ""ENGINEERING"",
             ""manager"": {
                 ""$class"": ""org.accordproject.concerto.test@1.2.3.Employee"",
+                ""department"": null,
+                ""manager"": null,
                 ""employeeId"": ""456"",
                 ""email"": ""test@example.com"",
                 ""firstName"": ""Martin"",
-                ""lastName"": ""Halford""
+                ""lastName"": ""Halford"",
+                ""$identifier"": null
             },
             ""employeeId"": ""123"",
             ""email"": ""test@example.com"",
@@ -111,17 +109,20 @@ public class ConcertoConverterNewtonsoftSerializeTests
             }
         };
 
-        string jsonString = JsonConvert.SerializeObject(employee, options);
+        string jsonString = JsonConvert.SerializeObject(employee);
         Assert.Equal(Regex.Replace(@"{
             ""$class"": ""org.accordproject.concerto.test@1.2.3.Employee"",
             ""department"": ""ENGINEERING"",
             ""manager"": {
                 ""$class"": ""org.accordproject.concerto.test@1.2.3.Manager"",
                 ""budget"": 500000.0,
+                ""department"": null,
+                ""manager"": null,
                 ""employeeId"": ""456"",
                 ""email"": ""test@example.com"",
                 ""firstName"": ""Martin"",
-                ""lastName"": ""Halford""
+                ""lastName"": ""Halford"",
+                ""$identifier"": null
             },
             ""employeeId"": ""123"",
             ""email"": ""test@example.com"",
