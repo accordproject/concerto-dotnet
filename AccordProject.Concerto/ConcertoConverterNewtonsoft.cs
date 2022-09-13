@@ -32,9 +32,14 @@ public class ConcertoConverterNewtonsoft : JsonConverter
         throw new NotImplementedException();
     }
 
-    public override Object ReadJson(JsonReader reader, Type objectType, Object? existingValue, JsonSerializer serializer)
+    public override Object? ReadJson(JsonReader reader, Type objectType, Object? existingValue, JsonSerializer serializer)
     {
-        if (reader.TokenType != JsonToken.StartObject)
+        if (reader.TokenType == JsonToken.Null)
+        {
+            // Null values may or may not be okay depending on the model, but we cannot know here.
+            return null;
+        }
+        else if (reader.TokenType != JsonToken.StartObject)
         {
             throw new JsonException($"Only JSON Objects can be deserialized with ConcertoConverterNewtonsoft, current token is {reader.TokenType}.");
         }

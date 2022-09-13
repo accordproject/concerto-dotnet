@@ -21,13 +21,6 @@ using Newtonsoft.Json.Converters;
 
 public class ConcertoConverterNewtonsoftMetamodelTests
 {
-
-    JsonSerializerSettings options = new()
-    {
-        NullValueHandling = NullValueHandling.Ignore,
-        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-    };
-
     [Fact]
     public void Roundtrip()
     {
@@ -49,8 +42,8 @@ public class ConcertoConverterNewtonsoftMetamodelTests
             declarations = new ConceptDeclaration[1] { carConcept },
         };
 
-        var jsonString = JsonConvert.SerializeObject(carModel, options);
-        Model model2 = JsonConvert.DeserializeObject<Model>(jsonString, options);
+        var jsonString = JsonConvert.SerializeObject(carModel);
+        Model model2 = JsonConvert.DeserializeObject<Model>(jsonString);
         ConceptDeclaration car2 = (ConceptDeclaration) model2.declarations[0];
         StringProperty prop = (StringProperty)((ConceptDeclaration)car2).properties[0];
         Assert.Equal(prop._class,"concerto.metamodel@1.0.0.StringProperty");
@@ -60,7 +53,7 @@ public class ConcertoConverterNewtonsoftMetamodelTests
     public void Patent()
     {
         string jsonString = System.IO.File.ReadAllText(@"./../../../data/patent.json");
-        Model model = JsonConvert.DeserializeObject<Model>(jsonString, options);
+        Model model = JsonConvert.DeserializeObject<Model>(jsonString);
         // var jsonString2 = JsonConvert.SerializeObject(model, options);
         // Console.WriteLine(jsonString2);
     }
