@@ -26,12 +26,12 @@ public class ConcertoConverterNewtonsoftSerializeTests
     {
         Employee employee = new Employee()
         {
-            firstName = "Matt",
-            lastName = "Roberts",
-            email = "test@example.com",
-            _identifier = "test@example.com",
-            department = Department.ENGINEERING,
-            employeeId = "123"
+            FirstName = "Matt",
+            LastName = "Roberts",
+            Email = "test@example.com",
+            _Identifier = "test@example.com",
+            Department = Department.ENGINEERING,
+            EmployeeId = "123"
         };
 
         string jsonString = JsonConvert.SerializeObject(employee);
@@ -53,17 +53,17 @@ public class ConcertoConverterNewtonsoftSerializeTests
     {
         Employee employee = new Employee()
         {
-            firstName = "Matt",
-            lastName = "Roberts",
-            email = "test@example.com",
-            _identifier = "test@example.com",
-            department = Department.ENGINEERING,
-            employeeId = "123",
-            manager = new Employee(){
-                email = "test@example.com",
-                employeeId = "456",
-                firstName = "Martin",
-                lastName = "Halford",
+            FirstName = "Matt",
+            LastName = "Roberts",
+            Email = "test@example.com",
+            _Identifier = "test@example.com",
+            Department = Department.ENGINEERING,
+            EmployeeId = "123",
+            Manager = new Employee(){
+                Email = "test@example.com",
+                EmployeeId = "456",
+                FirstName = "Martin",
+                LastName = "Halford",
             }
         };
 
@@ -94,18 +94,18 @@ public class ConcertoConverterNewtonsoftSerializeTests
     {
         Employee employee = new Employee()
         {
-            firstName = "Matt",
-            lastName = "Roberts",
-            email = "test@example.com",
-            _identifier = "test@example.com",
-            department = Department.ENGINEERING,
-            employeeId = "123",
-            manager = new Manager(){
-                email = "test@example.com",
-                employeeId = "456",
-                firstName = "Martin",
-                lastName = "Halford",
-                budget = 500000
+            FirstName = "Matt",
+            LastName = "Roberts",
+            Email = "test@example.com",
+            _Identifier = "test@example.com",
+            Department = Department.ENGINEERING,
+            EmployeeId = "123",
+            Manager = new Manager(){
+                Email = "test@example.com",
+                EmployeeId = "456",
+                FirstName = "Martin",
+                LastName = "Halford",
+                Budget = 500000
             }
         };
 
