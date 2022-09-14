@@ -26,27 +26,27 @@ public class ConcertoConverterNewtonsoftMetamodelTests
     {
         var carVIN = new StringProperty()
         {
-            name = "vin"
+            Name = "vin"
         };
 
         var carConcept = new ConceptDeclaration()
         {
-            name = "Car",
-            isAbstract = false,
-            properties = new StringProperty[1] { carVIN }
+            Name = "Car",
+            IsAbstract = false,
+            Properties = new StringProperty[1] { carVIN }
         };
 
         var carModel = new Model()
         {
-            _namespace = "org.acme",
-            declarations = new ConceptDeclaration[1] { carConcept },
+            Namespace = "org.acme",
+            Declarations = new ConceptDeclaration[1] { carConcept },
         };
 
         var jsonString = JsonConvert.SerializeObject(carModel);
         Model model2 = JsonConvert.DeserializeObject<Model>(jsonString);
-        ConceptDeclaration car2 = (ConceptDeclaration) model2.declarations[0];
-        StringProperty prop = (StringProperty)((ConceptDeclaration)car2).properties[0];
-        Assert.Equal(prop._class,"concerto.metamodel@1.0.0.StringProperty");
+        ConceptDeclaration car2 = (ConceptDeclaration) model2.Declarations[0];
+        StringProperty prop = (StringProperty)((ConceptDeclaration)car2).Properties[0];
+        Assert.Equal(prop._Class,"concerto.metamodel@1.0.0.StringProperty");
     }
 
     [Fact]

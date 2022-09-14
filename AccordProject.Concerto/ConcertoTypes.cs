@@ -12,43 +12,42 @@
  * limitations under the License.
  */
 
-namespace AccordProject.Concerto {
-   [AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Concept")]
-   [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
-   public abstract class Concept {
-      [Newtonsoft.Json.JsonProperty("$class")]
-		public virtual string _class { get; } = "concerto@1.0.0.Concept";
-   }
-   [AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Asset")]
-   [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
-   public abstract class Asset : Concept {
-      [Newtonsoft.Json.JsonProperty("$class")]
-		public override string _class { get; } = "concerto@1.0.0.Asset";
-      [Newtonsoft.Json.JsonProperty("$identifier")]
-		public string _identifier { get; set; }
-   }
-   [AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Participant")]
-   [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
-   public abstract class Participant : Concept {
-      [Newtonsoft.Json.JsonProperty("$class")]
-		public override string _class { get; } = "concerto@1.0.0.Participant";
-      [Newtonsoft.Json.JsonProperty("$identifier")]
-		public string _identifier { get; set; }
-   }
-   [AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Transaction")]
-   [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
-   public abstract class Transaction : Concept {
-      [Newtonsoft.Json.JsonProperty("$class")]
-		public override string _class { get; } = "concerto@1.0.0.Transaction";
-      [Newtonsoft.Json.JsonProperty("$timestamp")]
-		public System.DateTime _timestamp { get; set; }
-   }
-   [AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Event")]
-   [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
-   public abstract class Event : Concept {
-      [Newtonsoft.Json.JsonProperty("$class")]
-		public override string _class { get; } = "concerto@1.0.0.Event";
-      [Newtonsoft.Json.JsonProperty("$timestamp")]
-		public System.DateTime _timestamp { get; set; }
-   }
+namespace AccordProject.Concerto;
+[AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Concept")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public abstract class Concept {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public virtual string _Class { get; } = "concerto@1.0.0.Concept";
+}
+[AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Asset")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public abstract class Asset : Concept {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto@1.0.0.Asset";
+   [Newtonsoft.Json.JsonProperty("$identifier")]
+   public string _Identifier { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Participant")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public abstract class Participant : Concept {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto@1.0.0.Participant";
+   [Newtonsoft.Json.JsonProperty("$identifier")]
+   public string _Identifier { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Transaction")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public abstract class Transaction : Concept {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto@1.0.0.Transaction";
+   [Newtonsoft.Json.JsonProperty("$timestamp")]
+   public System.DateTime _Timestamp { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Event")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public abstract class Event : Concept {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto@1.0.0.Event";
+   [Newtonsoft.Json.JsonProperty("$timestamp")]
+   public System.DateTime _Timestamp { get; set; }
 }
