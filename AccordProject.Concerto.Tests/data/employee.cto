@@ -37,3 +37,7 @@ participant Employee identified by employeeId extends Person  {
 participant Manager extends Employee  {
     o Double budget optional
 }
+
+concept Project {
+    
+}
