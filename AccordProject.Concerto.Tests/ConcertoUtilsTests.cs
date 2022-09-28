@@ -104,4 +104,46 @@ public class ConcertoUtilsTests
         var ex = Assert.Throws<Exception>(() => ConcertoUtils.ParseType("org.example@.Foo"));
         Assert.Equal("Invalid fully qualified name \"org.example@.Foo\"", ex.Message);
     }
+
+    [Fact]
+    public void HasIdentifierTrueForTypeWithIdentifier()
+    {
+        var employee = new Employee() { EmployeeId = "12345678" };
+        Assert.True(ConcertoUtils.HasIdentifier(employee));
+    }
+
+    [Fact]
+    public void HasIdentifierTrueForTypeWithInheritedIdentifier()
+    {
+        var manager = new Manager() { EmployeeId = "12345678" };
+        Assert.True(ConcertoUtils.HasIdentifier(manager));
+    }
+
+    [Fact]
+    public void HasIdentifierFalseForTypeWithoutIdentifier()
+    {
+        var project = new Project() {};
+        Assert.False(ConcertoUtils.HasIdentifier(project));
+    }
+
+    [Fact]
+    public void GetIdentifierReturnsForTypeWithIdentifier()
+    {
+        var employee = new Employee() { EmployeeId = "12345678" };
+        Assert.Equal("12345678", ConcertoUtils.GetIdentifier(employee));
+    }
+
+    [Fact]
+    public void GetIdentifierReturnsForTypeWithInheritedIdentifier()
+    {
+        var manager = new Manager() { EmployeeId = "12345678" };
+        Assert.Equal("12345678", ConcertoUtils.GetIdentifier(manager));
+    }
+
+    [Fact]
+    public void GetIdentifierReturnsForTypeWithoutIdentifier()
+    {
+        var project = new Project() {};
+        Assert.Null(ConcertoUtils.GetIdentifier(project));
+    }
 }

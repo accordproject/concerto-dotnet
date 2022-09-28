@@ -42,6 +42,7 @@ public class Employee : Person {
    public Department? Department { get; set; }
    [Newtonsoft.Json.JsonProperty("manager")]
    public Employee Manager { get; set; }
+   [AccordProject.Concerto.Identifier()]
    [Newtonsoft.Json.JsonProperty("employeeId")]
    public string EmployeeId { get; set; }
 }
@@ -52,4 +53,10 @@ public class Manager : Employee {
    public override string _Class { get; } = "org.accordproject.concerto.test@1.2.3.Manager";
    [Newtonsoft.Json.JsonProperty("budget")]
    public float Budget { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "org.accordproject.concerto.test", Version = "1.2.3", Name = "Project")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class Project : Concept {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "org.accordproject.concerto.test@1.2.3.Project";
 }

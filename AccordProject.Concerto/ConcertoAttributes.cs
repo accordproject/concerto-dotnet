@@ -15,7 +15,8 @@
 namespace AccordProject.Concerto;
 
 [AttributeUsage(AttributeTargets.Class)]
-public class TypeAttribute : Attribute {
+public class TypeAttribute : Attribute
+{
     public string Namespace;
     public string? Version;
     public string Name;
@@ -28,4 +29,10 @@ public class TypeAttribute : Attribute {
             Name = Name
         };
     }
+}
+
+[AttributeUsage(AttributeTargets.Property)]
+public class IdentifierAttribute : Attribute
+{
+
 }

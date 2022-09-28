@@ -12,6 +12,10 @@
  * limitations under the License.
  */
 
+namespace AccordProject.Concerto;
+
+using System.Reflection;
+
 /// <summary>
 /// This class represents a Concerto type, for example org.example@1.2.3.Foo.
 /// </summary>
@@ -106,5 +110,39 @@ public class ConcertoUtils
             throw new Exception($"Invalid fully qualified name \"{fqn}\"");
         }
         return new ConcertoType() { Namespace = ns, Version = version, Name = name };
+    }
+
+    public static bool HasIdentifier(Concept concept)
+    {
+        var type = concept.GetType();
+        var identifierProperty = FindIdentifierProperty(type);
+        return identifierProperty is not null;
+    }
+
+    public static string? GetIdentifier(Concept concept)
+    {
+        var type = concept.GetType();
+        var identifierProperty = FindIdentifierProperty(type);
+        if (identifierProperty is null)
+        {
+            return null;
+        }
+        return identifierProperty.GetValue(concept) as string;
+    }
+
+    private static PropertyInfo? FindIdentifierProperty(Type type)
+    {
+        var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+        var identifierProperty = properties.FirstOrDefault(property => property.GetCustomAttributes(typeof(IdentifierAttribute), false).Length > 0);
+        if (identifierProperty is not null)
+        {
+            return identifierProperty;
+        }
+        var baseType = type.BaseType;
+        if (baseType is null)
+        {
+            return null;
+        }
+        return FindIdentifierProperty(baseType);
     }
 }

@@ -24,6 +24,7 @@ public abstract class Concept {
 public abstract class Asset : Concept {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto@1.0.0.Asset";
+   [AccordProject.Concerto.Identifier()]
    [Newtonsoft.Json.JsonProperty("$identifier")]
    public string _Identifier { get; set; }
 }
@@ -32,6 +33,7 @@ public abstract class Asset : Concept {
 public abstract class Participant : Concept {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto@1.0.0.Participant";
+   [AccordProject.Concerto.Identifier()]
    [Newtonsoft.Json.JsonProperty("$identifier")]
    public string _Identifier { get; set; }
 }
