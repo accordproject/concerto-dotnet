@@ -52,7 +52,7 @@ public class Manager : Employee {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "org.accordproject.concerto.test@1.2.3.Manager";
    [Newtonsoft.Json.JsonProperty("budget")]
-   public float Budget { get; set; }
+   public float? Budget { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "org.accordproject.concerto.test", Version = "1.2.3", Name = "Project")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]

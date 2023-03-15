@@ -81,7 +81,7 @@ public class ConcertoTypeDictionary
     {
         var types = assembly.GetTypes().Where(type =>
             type.IsClass
-            && type.IsAssignableTo(typeof(Concept))
+            && typeof(Concept).IsAssignableFrom(type)
             && type.GetCustomAttribute<TypeAttribute>() != null);
         foreach (var type in types)
         {

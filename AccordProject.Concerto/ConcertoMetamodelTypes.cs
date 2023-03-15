@@ -54,7 +54,7 @@ public abstract class DecoratorLiteral : Concept {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.DecoratorLiteral";
    [Newtonsoft.Json.JsonProperty("location")]
-   public Range Location { get; set; }
+   public Range? Location { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DecoratorString")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -98,9 +98,9 @@ public class Decorator : Concept {
    [Newtonsoft.Json.JsonProperty("name")]
    public string Name { get; set; }
    [Newtonsoft.Json.JsonProperty("arguments")]
-   public DecoratorLiteral[] Arguments { get; set; }
+   public DecoratorLiteral?[] Arguments { get; set; }
    [Newtonsoft.Json.JsonProperty("location")]
-   public Range Location { get; set; }
+   public Range? Location { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "Identified")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -124,9 +124,9 @@ public abstract class Declaration : Concept {
    [Newtonsoft.Json.JsonProperty("name")]
    public string Name { get; set; }
    [Newtonsoft.Json.JsonProperty("decorators")]
-   public Decorator[] Decorators { get; set; }
+   public Decorator?[] Decorators { get; set; }
    [Newtonsoft.Json.JsonProperty("location")]
-   public Range Location { get; set; }
+   public Range? Location { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "EnumDeclaration")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -144,9 +144,9 @@ public class EnumProperty : Concept {
    [Newtonsoft.Json.JsonProperty("name")]
    public string Name { get; set; }
    [Newtonsoft.Json.JsonProperty("decorators")]
-   public Decorator[] Decorators { get; set; }
+   public Decorator?[] Decorators { get; set; }
    [Newtonsoft.Json.JsonProperty("location")]
-   public Range Location { get; set; }
+   public Range? Location { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "ConceptDeclaration")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -156,9 +156,9 @@ public class ConceptDeclaration : Declaration {
    [Newtonsoft.Json.JsonProperty("isAbstract")]
    public bool IsAbstract { get; set; }
    [Newtonsoft.Json.JsonProperty("identified")]
-   public Identified Identified { get; set; }
+   public Identified? Identified { get; set; }
    [Newtonsoft.Json.JsonProperty("superType")]
-   public TypeIdentifier SuperType { get; set; }
+   public TypeIdentifier? SuperType { get; set; }
    [Newtonsoft.Json.JsonProperty("properties")]
    public Property[] Properties { get; set; }
 }
@@ -198,9 +198,9 @@ public abstract class Property : Concept {
    [Newtonsoft.Json.JsonProperty("isOptional")]
    public bool IsOptional { get; set; }
    [Newtonsoft.Json.JsonProperty("decorators")]
-   public Decorator[] Decorators { get; set; }
+   public Decorator?[] Decorators { get; set; }
    [Newtonsoft.Json.JsonProperty("location")]
-   public Range Location { get; set; }
+   public Range? Location { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "RelationshipProperty")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -226,7 +226,7 @@ public class BooleanProperty : Property {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.BooleanProperty";
    [Newtonsoft.Json.JsonProperty("defaultValue")]
-   public bool DefaultValue { get; set; }
+   public bool? DefaultValue { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DateTimeProperty")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -242,7 +242,7 @@ public class StringProperty : Property {
    [Newtonsoft.Json.JsonProperty("defaultValue")]
    public string DefaultValue { get; set; }
    [Newtonsoft.Json.JsonProperty("validator")]
-   public StringRegexValidator Validator { get; set; }
+   public StringRegexValidator? Validator { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "StringRegexValidator")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -260,9 +260,9 @@ public class DoubleProperty : Property {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.DoubleProperty";
    [Newtonsoft.Json.JsonProperty("defaultValue")]
-   public float DefaultValue { get; set; }
+   public float? DefaultValue { get; set; }
    [Newtonsoft.Json.JsonProperty("validator")]
-   public DoubleDomainValidator Validator { get; set; }
+   public DoubleDomainValidator? Validator { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DoubleDomainValidator")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -270,9 +270,9 @@ public class DoubleDomainValidator : Concept {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.DoubleDomainValidator";
    [Newtonsoft.Json.JsonProperty("lower")]
-   public float Lower { get; set; }
+   public float? Lower { get; set; }
    [Newtonsoft.Json.JsonProperty("upper")]
-   public float Upper { get; set; }
+   public float? Upper { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "IntegerProperty")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -280,9 +280,9 @@ public class IntegerProperty : Property {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.IntegerProperty";
    [Newtonsoft.Json.JsonProperty("defaultValue")]
-   public int DefaultValue { get; set; }
+   public int? DefaultValue { get; set; }
    [Newtonsoft.Json.JsonProperty("validator")]
-   public IntegerDomainValidator Validator { get; set; }
+   public IntegerDomainValidator? Validator { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "IntegerDomainValidator")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -290,9 +290,9 @@ public class IntegerDomainValidator : Concept {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.IntegerDomainValidator";
    [Newtonsoft.Json.JsonProperty("lower")]
-   public int Lower { get; set; }
+   public int? Lower { get; set; }
    [Newtonsoft.Json.JsonProperty("upper")]
-   public int Upper { get; set; }
+   public int? Upper { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "LongProperty")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -300,9 +300,9 @@ public class LongProperty : Property {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.LongProperty";
    [Newtonsoft.Json.JsonProperty("defaultValue")]
-   public long DefaultValue { get; set; }
+   public long? DefaultValue { get; set; }
    [Newtonsoft.Json.JsonProperty("validator")]
-   public LongDomainValidator Validator { get; set; }
+   public LongDomainValidator? Validator { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "LongDomainValidator")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -310,9 +310,9 @@ public class LongDomainValidator : Concept {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.LongDomainValidator";
    [Newtonsoft.Json.JsonProperty("lower")]
-   public long Lower { get; set; }
+   public long? Lower { get; set; }
    [Newtonsoft.Json.JsonProperty("upper")]
-   public long Upper { get; set; }
+   public long? Upper { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "Import")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -358,11 +358,11 @@ public class Model : Concept {
    [Newtonsoft.Json.JsonProperty("concertoVersion")]
    public string ConcertoVersion { get; set; }
    [Newtonsoft.Json.JsonProperty("imports")]
-   public Import[] Imports { get; set; }
+   public Import?[] Imports { get; set; }
    [Newtonsoft.Json.JsonProperty("declarations")]
-   public Declaration[] Declarations { get; set; }
+   public Declaration?[] Declarations { get; set; }
    [Newtonsoft.Json.JsonProperty("decorators")]
-   public Decorator[] Decorators { get; set; }
+   public Decorator?[] Decorators { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "Models")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -371,4 +371,66 @@ public class Models : Concept {
    public override string _Class { get; } = "concerto.metamodel@1.0.0.Models";
    [Newtonsoft.Json.JsonProperty("models")]
    public Model[] _Models { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "ScalarDeclaration")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public abstract class ScalarDeclaration : Declaration {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.ScalarDeclaration";
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "BooleanScalar")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class BooleanScalar : ScalarDeclaration {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.BooleanScalar";
+   [Newtonsoft.Json.JsonProperty("defaultValue")]
+   public bool DefaultValue { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "IntegerScalar")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class IntegerScalar : ScalarDeclaration {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.IntegerScalar";
+   [Newtonsoft.Json.JsonProperty("defaultValue")]
+   public int? DefaultValue { get; set; }
+   [Newtonsoft.Json.JsonProperty("validator")]
+   public IntegerDomainValidator? Validator { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "LongScalar")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class LongScalar : ScalarDeclaration {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.LongScalar";
+   [Newtonsoft.Json.JsonProperty("defaultValue")]
+   public long? DefaultValue { get; set; }
+   [Newtonsoft.Json.JsonProperty("validator")]
+   public LongDomainValidator? Validator { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DoubleScalar")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class DoubleScalar : ScalarDeclaration {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.DoubleScalar";
+   [Newtonsoft.Json.JsonProperty("defaultValue")]
+   public float? DefaultValue { get; set; }
+   [Newtonsoft.Json.JsonProperty("validator")]
+   public DoubleDomainValidator? Validator { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "StringScalar")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class StringScalar : ScalarDeclaration {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.StringScalar";
+   [Newtonsoft.Json.JsonProperty("defaultValue")]
+   public string DefaultValue { get; set; }
+   [Newtonsoft.Json.JsonProperty("validator")]
+   public StringRegexValidator? Validator { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DateTimeScalar")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class DateTimeScalar : ScalarDeclaration {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.DateTimeScalar";
+   [Newtonsoft.Json.JsonProperty("defaultValue")]
+   public string DefaultValue { get; set; }
 }
