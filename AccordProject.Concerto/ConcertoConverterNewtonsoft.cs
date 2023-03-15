@@ -23,7 +23,7 @@ public class ConcertoConverterNewtonsoft : JsonConverter
 
     public override bool CanWrite => false;
 
-    public override bool CanConvert(Type t) => t.IsAssignableTo(typeof(Concept));
+    public override bool CanConvert(Type t) => typeof(Concept).IsAssignableFrom(t);
 
     public override void WriteJson(JsonWriter writer, Object? value, JsonSerializer serializer)
     {
@@ -67,7 +67,7 @@ public class ConcertoConverterNewtonsoft : JsonConverter
         {
             actualType = objectType;
         }
-        else if (declaredType.IsAssignableTo(objectType))
+        else if (objectType.IsAssignableFrom(declaredType))
         {
             // The declared type in the JSON is a subtype of the object type in the .NET class.
             actualType = declaredType;
