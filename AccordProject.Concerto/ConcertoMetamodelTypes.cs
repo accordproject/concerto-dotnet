@@ -36,7 +36,7 @@ public class Range : Concept {
    [Newtonsoft.Json.JsonProperty("end")]
    public Position End { get; set; }
    [Newtonsoft.Json.JsonProperty("source")]
-   public string Source { get; set; }
+   public string? Source { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "TypeIdentifier")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -46,7 +46,7 @@ public class TypeIdentifier : Concept {
    [Newtonsoft.Json.JsonProperty("name")]
    public string Name { get; set; }
    [Newtonsoft.Json.JsonProperty("namespace")]
-   public string Namespace { get; set; }
+   public string? Namespace { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DecoratorLiteral")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -121,12 +121,115 @@ public class IdentifiedBy : Identified {
 public abstract class Declaration : Concept {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.Declaration";
+   [System.ComponentModel.DataAnnotations.RegularExpression(@"^(\p{Lu}|\p{Ll}|\p{Lt}|\p{Lm}|\p{Lo}|\p{Nl}|\$|_|\\u[0-9A-Fa-f]{4})(?:\p{Lu}|\p{Ll}|\p{Lt}|\p{Lm}|\p{Lo}|\p{Nl}|\$|_|\\u[0-9A-Fa-f]{4}|\p{Mn}|\p{Mc}|\p{Nd}|\p{Pc}|\u200C|\u200D)*$", ErrorMessage = "Invalid characters")]
    [Newtonsoft.Json.JsonProperty("name")]
    public string Name { get; set; }
    [Newtonsoft.Json.JsonProperty("decorators")]
    public Decorator?[] Decorators { get; set; }
    [Newtonsoft.Json.JsonProperty("location")]
    public Range? Location { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "MapKeyType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public abstract class MapKeyType : Concept {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.MapKeyType";
+   [Newtonsoft.Json.JsonProperty("decorators")]
+   public Decorator?[] Decorators { get; set; }
+   [Newtonsoft.Json.JsonProperty("location")]
+   public Range? Location { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "MapValueType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public abstract class MapValueType : Concept {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.MapValueType";
+   [Newtonsoft.Json.JsonProperty("decorators")]
+   public Decorator?[] Decorators { get; set; }
+   [Newtonsoft.Json.JsonProperty("location")]
+   public Range? Location { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "MapDeclaration")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class MapDeclaration : Declaration {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.MapDeclaration";
+   [Newtonsoft.Json.JsonProperty("key")]
+   public MapKeyType Key { get; set; }
+   [Newtonsoft.Json.JsonProperty("value")]
+   public MapValueType Value { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "StringMapKeyType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class StringMapKeyType : MapKeyType {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.StringMapKeyType";
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DateTimeMapKeyType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class DateTimeMapKeyType : MapKeyType {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.DateTimeMapKeyType";
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "ObjectMapKeyType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class ObjectMapKeyType : MapKeyType {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.ObjectMapKeyType";
+   [Newtonsoft.Json.JsonProperty("type")]
+   public TypeIdentifier Type { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "BooleanMapValueType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class BooleanMapValueType : MapValueType {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.BooleanMapValueType";
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DateTimeMapValueType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class DateTimeMapValueType : MapValueType {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.DateTimeMapValueType";
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "StringMapValueType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class StringMapValueType : MapValueType {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.StringMapValueType";
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "IntegerMapValueType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class IntegerMapValueType : MapValueType {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.IntegerMapValueType";
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "LongMapValueType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class LongMapValueType : MapValueType {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.LongMapValueType";
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DoubleMapValueType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class DoubleMapValueType : MapValueType {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.DoubleMapValueType";
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "ObjectMapValueType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class ObjectMapValueType : MapValueType {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.ObjectMapValueType";
+   [Newtonsoft.Json.JsonProperty("type")]
+   public TypeIdentifier Type { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "RelationshipMapValueType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class RelationshipMapValueType : MapValueType {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.RelationshipMapValueType";
+   [Newtonsoft.Json.JsonProperty("type")]
+   public TypeIdentifier Type { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "EnumDeclaration")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -141,6 +244,7 @@ public class EnumDeclaration : Declaration {
 public class EnumProperty : Concept {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.EnumProperty";
+   [System.ComponentModel.DataAnnotations.RegularExpression(@"^(\p{Lu}|\p{Ll}|\p{Lt}|\p{Lm}|\p{Lo}|\p{Nl}|\$|_|\\u[0-9A-Fa-f]{4})(?:\p{Lu}|\p{Ll}|\p{Lt}|\p{Lm}|\p{Lo}|\p{Nl}|\$|_|\\u[0-9A-Fa-f]{4}|\p{Mn}|\p{Mc}|\p{Nd}|\p{Pc}|\u200C|\u200D)*$", ErrorMessage = "Invalid characters")]
    [Newtonsoft.Json.JsonProperty("name")]
    public string Name { get; set; }
    [Newtonsoft.Json.JsonProperty("decorators")]
@@ -191,6 +295,7 @@ public class EventDeclaration : ConceptDeclaration {
 public abstract class Property : Concept {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.Property";
+   [System.ComponentModel.DataAnnotations.RegularExpression(@"^(\p{Lu}|\p{Ll}|\p{Lt}|\p{Lm}|\p{Lo}|\p{Nl}|\$|_|\\u[0-9A-Fa-f]{4})(?:\p{Lu}|\p{Ll}|\p{Lt}|\p{Lm}|\p{Lo}|\p{Nl}|\$|_|\\u[0-9A-Fa-f]{4}|\p{Mn}|\p{Mc}|\p{Nd}|\p{Pc}|\u200C|\u200D)*$", ErrorMessage = "Invalid characters")]
    [Newtonsoft.Json.JsonProperty("name")]
    public string Name { get; set; }
    [Newtonsoft.Json.JsonProperty("isArray")]
@@ -216,7 +321,7 @@ public class ObjectProperty : Property {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.ObjectProperty";
    [Newtonsoft.Json.JsonProperty("defaultValue")]
-   public string DefaultValue { get; set; }
+   public string? DefaultValue { get; set; }
    [Newtonsoft.Json.JsonProperty("type")]
    public TypeIdentifier Type { get; set; }
 }
@@ -240,9 +345,11 @@ public class StringProperty : Property {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.StringProperty";
    [Newtonsoft.Json.JsonProperty("defaultValue")]
-   public string DefaultValue { get; set; }
+   public string? DefaultValue { get; set; }
    [Newtonsoft.Json.JsonProperty("validator")]
    public StringRegexValidator? Validator { get; set; }
+   [Newtonsoft.Json.JsonProperty("lengthValidator")]
+   public StringLengthValidator? LengthValidator { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "StringRegexValidator")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -253,6 +360,16 @@ public class StringRegexValidator : Concept {
    public string Pattern { get; set; }
    [Newtonsoft.Json.JsonProperty("flags")]
    public string Flags { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "StringLengthValidator")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class StringLengthValidator : Concept {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.StringLengthValidator";
+   [Newtonsoft.Json.JsonProperty("minLength")]
+   public int? MinLength { get; set; }
+   [Newtonsoft.Json.JsonProperty("maxLength")]
+   public int? MaxLength { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DoubleProperty")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -322,7 +439,7 @@ public abstract class Import : Concept {
    [Newtonsoft.Json.JsonProperty("namespace")]
    public string Namespace { get; set; }
    [Newtonsoft.Json.JsonProperty("uri")]
-   public string Uri { get; set; }
+   public string? Uri { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "ImportAll")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -354,9 +471,9 @@ public class Model : Concept {
    [Newtonsoft.Json.JsonProperty("namespace")]
    public string Namespace { get; set; }
    [Newtonsoft.Json.JsonProperty("sourceUri")]
-   public string SourceUri { get; set; }
+   public string? SourceUri { get; set; }
    [Newtonsoft.Json.JsonProperty("concertoVersion")]
-   public string ConcertoVersion { get; set; }
+   public string? ConcertoVersion { get; set; }
    [Newtonsoft.Json.JsonProperty("imports")]
    public Import?[] Imports { get; set; }
    [Newtonsoft.Json.JsonProperty("declarations")]
@@ -384,7 +501,7 @@ public class BooleanScalar : ScalarDeclaration {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.BooleanScalar";
    [Newtonsoft.Json.JsonProperty("defaultValue")]
-   public bool DefaultValue { get; set; }
+   public bool? DefaultValue { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "IntegerScalar")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -422,9 +539,11 @@ public class StringScalar : ScalarDeclaration {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.StringScalar";
    [Newtonsoft.Json.JsonProperty("defaultValue")]
-   public string DefaultValue { get; set; }
+   public string? DefaultValue { get; set; }
    [Newtonsoft.Json.JsonProperty("validator")]
    public StringRegexValidator? Validator { get; set; }
+   [Newtonsoft.Json.JsonProperty("lengthValidator")]
+   public StringLengthValidator? LengthValidator { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DateTimeScalar")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -432,5 +551,5 @@ public class DateTimeScalar : ScalarDeclaration {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.DateTimeScalar";
    [Newtonsoft.Json.JsonProperty("defaultValue")]
-   public string DefaultValue { get; set; }
+   public string? DefaultValue { get; set; }
 }
