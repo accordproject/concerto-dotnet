@@ -9,12 +9,12 @@ namespace Concerto.Models.concerto {
 public abstract class Concept {
    [JsonPropertyName("$class")]
    [NewtonsoftJson.JsonProperty("$class")]
-   public virtual string _class { get; } = "concerto@1.0.0.Concept";
+   public virtual string _class { get; } = "concerto.Concept";
 }
 public abstract class Asset : Concept {
    [JsonPropertyName("$class")]
    [NewtonsoftJson.JsonProperty("$class")]
-   public override string _class { get; } = "concerto@1.0.0.Asset";
+   public override string _class { get; } = "concerto.Asset";
    [JsonPropertyName("$identifier")]
    [NewtonsoftJson.JsonProperty("$identifier")]
    public string _identifier { get; set; }
@@ -23,7 +23,7 @@ public abstract class Asset : Concept {
 public abstract class Participant : Concept {
    [JsonPropertyName("$class")]
    [NewtonsoftJson.JsonProperty("$class")]
-   public override string _class { get; } = "concerto@1.0.0.Participant";
+   public override string _class { get; } = "concerto.Participant";
    [JsonPropertyName("$identifier")]
    [NewtonsoftJson.JsonProperty("$identifier")]
    public string _identifier { get; set; }
@@ -31,7 +31,7 @@ public abstract class Participant : Concept {
 public abstract class Transaction : Concept {
    [JsonPropertyName("$class")]
    [NewtonsoftJson.JsonProperty("$class")]
-   public override string _class { get; } = "concerto@1.0.0.Transaction";
+   public override string _class { get; } = "concerto.Transaction";
    [JsonPropertyName("$timestamp")]
    [NewtonsoftJson.JsonProperty("$timestamp")]
    public System.DateTime _timestamp { get; set; }
@@ -39,7 +39,7 @@ public abstract class Transaction : Concept {
 public abstract class Event : Concept {
    [JsonPropertyName("$class")]
    [NewtonsoftJson.JsonProperty("$class")]
-   public override string _class { get; } = "concerto@1.0.0.Event";
+   public override string _class { get; } = "concerto.Event";
    [JsonPropertyName("$timestamp")]
    [NewtonsoftJson.JsonProperty("$timestamp")]
    public System.DateTime _timestamp { get; set; }
