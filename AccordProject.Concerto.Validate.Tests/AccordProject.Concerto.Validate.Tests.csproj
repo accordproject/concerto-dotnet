@@ -30,10 +30,13 @@
     <None Remove="Fixtures\" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="Fixtures\testInstance.json">
+    <None Update="Fixtures\testModelAST.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Fixtures\testModelAST.json">
+    <None Update="Fixtures\testInstanceInvalid.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Fixtures\testInstanceValid.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
