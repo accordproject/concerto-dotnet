@@ -19,6 +19,7 @@ using AccordProject.Concerto.Metamodel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
+[Collection("Sequential")]
 public class ConcertoConverterNewtonsoftMetamodelTests
 {
     [Fact]
