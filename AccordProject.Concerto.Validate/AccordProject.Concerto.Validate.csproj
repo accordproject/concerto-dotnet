@@ -10,7 +10,6 @@
     <LangVersion>11.0</LangVersion>
   </PropertyGroup>
     <Target Name="WebPack" BeforeTargets="CoreCompile" DependsOnTargets="PrepareForBuild">
-        <Exec Command="npm ci" WorkingDirectory="./concerto-validate" />
         <Exec Command="npm run build" WorkingDirectory="./concerto-validate" />
   </Target>
   <ItemGroup>
