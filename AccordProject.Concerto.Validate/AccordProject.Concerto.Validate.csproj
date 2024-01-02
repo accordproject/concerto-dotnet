@@ -4,10 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <LangVersion>11.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <LangVersion>11.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
   </PropertyGroup>
     <Target Name="WebPack" BeforeTargets="CoreCompile" DependsOnTargets="PrepareForBuild">
         <Exec Command="npm run build" WorkingDirectory="./concerto-validate" />
