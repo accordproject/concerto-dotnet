@@ -290,6 +290,7 @@ FakesAssemblies/
 node_modules/
 */node_modules/
 */dist/
+dist/
 
 # Visual Studio 6 build log
 *.plg

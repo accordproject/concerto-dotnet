@@ -22,6 +22,7 @@ using Newtonsoft.Json.Converters;
 
 namespace ConcertoJsonConverterTests.Newtonsoft;
 
+[Collection("Sequential")]
 public class Deserialize
 {
     JsonSerializerSettings options = new()
