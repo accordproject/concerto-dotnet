@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccordProject.Concerto", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccordProject.Concerto.Tests", "AccordProject.Concerto.Tests\AccordProject.Concerto.Tests.csproj", "{CE1422D6-5783-4F86-9087-154FE0C2ECD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccordProject.Concerto.Validate", "AccordProject.Concerto.Validate\AccordProject.Concerto.Validate.csproj", "{2EBA74B2-4D71-4E03-A7D7-506D14195BDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccordProject.Concerto.Validate.Tests", "AccordProject.Concerto.Validate.Tests\AccordProject.Concerto.Validate.Tests.csproj", "{8169D433-CE2D-4AC0-AE0B-1F96B89662CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{CE1422D6-5783-4F86-9087-154FE0C2ECD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE1422D6-5783-4F86-9087-154FE0C2ECD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE1422D6-5783-4F86-9087-154FE0C2ECD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EBA74B2-4D71-4E03-A7D7-506D14195BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EBA74B2-4D71-4E03-A7D7-506D14195BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EBA74B2-4D71-4E03-A7D7-506D14195BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EBA74B2-4D71-4E03-A7D7-506D14195BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8169D433-CE2D-4AC0-AE0B-1F96B89662CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8169D433-CE2D-4AC0-AE0B-1F96B89662CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8169D433-CE2D-4AC0-AE0B-1F96B89662CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8169D433-CE2D-4AC0-AE0B-1F96B89662CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

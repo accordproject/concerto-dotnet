@@ -19,6 +19,7 @@ using AccordProject.Concerto;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
+[Collection("Sequential")]
 public class ConcertoConverterNewtonsoftSerializeTests
 {
     [Fact]

@@ -12,6 +12,7 @@ jobs:
 
     strategy:
       matrix:
+        node-version: [18.x, 20.x]
         dotnet-version: ['6.0.x' ]
         os:
           - ubuntu-latest
@@ -23,6 +24,11 @@ jobs:
     steps:
       - name: git checkout
         uses: actions/checkout@v2
+        
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v2
@@ -32,6 +38,7 @@ jobs:
         run: |
           dotnet restore AccordProject.Concerto.sln
           dotnet restore ConcertoJsonConverter.sln
+          cd AccordProject.Concerto.Validate/concerto-validate && npm ci
       - name: Build
         run: |
           dotnet build AccordProject.Concerto.sln --configuration Release --no-restore

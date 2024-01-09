@@ -17,6 +17,7 @@ namespace AccordProject.Concerto.Tests;
 using System;
 using AccordProject.Concerto;
 
+[Collection("Sequential")]
 public class ConcertoUtilsTests
 {
     [Fact]

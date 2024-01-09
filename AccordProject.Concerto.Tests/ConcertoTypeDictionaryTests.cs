@@ -18,6 +18,7 @@ using System;
 using AccordProject.Concerto;
 using AccordProject.Concerto.Metamodel;
 
+[Collection("Sequential")]
 public class ConcertoTypeDictionaryTests
 {
     [Fact]
