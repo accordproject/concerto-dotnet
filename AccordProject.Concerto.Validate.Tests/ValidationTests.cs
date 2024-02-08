@@ -59,7 +59,7 @@ public class ValidationTests
 
 
         var validator = new Validator(nodeJSService);
-        var result = await validator.GetAllReferencedTypeNames(instance);
+        var result = await validator.GeAllReferencedNamespaces(instance);
 
         Assert.NotEmpty(result);
         Assert.Equal(3, result.Length);

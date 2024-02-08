@@ -27,7 +27,7 @@ namespace AccordProject.Concerto.Validate
             return await nodeJSService.InvokeFromStringAsync<ValidationResult>(script, cacheIdentifier, "validateInstance", args);
 	    }
 
-        public async Task<string[]> GetAllReferencedTypeNames(string objectJson)
+        public async Task<string[]> GeAllReferencedNamespaces(string objectJson)
         {
             var args = new object[] { objectJson };
             return await nodeJSService.InvokeFromStringAsync<string[]>(script, cacheIdentifier, "getAllNeededNamespaces", args);
