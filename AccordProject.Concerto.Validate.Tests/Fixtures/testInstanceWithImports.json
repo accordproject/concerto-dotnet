@@ -1,0 +1,11 @@
+﻿{
+  "$class": "com.example.e2e.withImports@1.0.0.ConceptWithAnImport",
+  "anotherThing": {
+    "$class": "com.example.e2e.withExtendedConcept@1.0.0.ExtendedConcept",
+    "foo": "123",
+    "someThing": {
+      "$class": "com.example.e2e.withAConceptToBeImported@1.0.0.ConceptToBeImported",
+      "bar": "456"
+    }
+  }
+}
