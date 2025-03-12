@@ -13,11 +13,11 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Reflection;
-using System.Linq;
-using System.Collections.Generic;
 using Concerto.Models.concerto;
 
 namespace Concerto.Serialization;
@@ -62,9 +62,12 @@ public class ConcertoConverter : JsonConverterFactory
 
         private object deserializeWithGenericType(Type type, String rawText, object options)
         {
-            MethodInfo method = typeof(JsonSerializer).GetMethods()
+            string[] expectedTypes = [typeof(string).FullName, typeof(JsonSerializerOptions).FullName];
+            var method = typeof(JsonSerializer).GetMethods()
                 .Where(x => x.Name == nameof(JsonSerializer.Deserialize))
-                .FirstOrDefault(x => x.IsGenericMethod);
+                .FirstOrDefault(
+                    x => x.IsGenericMethod && x.GetParameters().Select(p => p.ParameterType.FullName)
+                        .SequenceEqual(expectedTypes));
             return method.MakeGenericMethod(type).Invoke(null, new object[] { rawText, options});
         }
 

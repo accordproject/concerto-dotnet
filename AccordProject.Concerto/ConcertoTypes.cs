@@ -13,6 +13,7 @@
  */
 
 namespace AccordProject.Concerto;
+using Concerto.Decorator;
 [AccordProject.Concerto.Type(Namespace = "concerto", Version = "1.0.0", Name = "Concept")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
 public abstract class Concept {
