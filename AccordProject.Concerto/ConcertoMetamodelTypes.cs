@@ -439,8 +439,8 @@ public class LongDomainValidator : Concept {
    [Newtonsoft.Json.JsonProperty("upper")]
    public long? Upper { get; set; }
 }
-[Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "AliasedType")]
-[Newtonsoft.Json.JsonConverter(typeof(ConcertoConverterNewtonsoft))]
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "AliasedType")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
 public class AliasedType : Concept {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.AliasedType";
