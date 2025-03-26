@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-namespace AccordProject.Concerto.Metamodel;
+namespace AccordProject.Concerto;
 using AccordProject.Concerto;
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "Position")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -101,6 +101,14 @@ public class Decorator : Concept {
    public DecoratorLiteral?[] Arguments { get; set; }
    [Newtonsoft.Json.JsonProperty("location")]
    public Range? Location { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DotNetNamespace")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class DotNetNamespace : Decorator {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.decorator@1.0.0.DotNetNamespace";
+   [Newtonsoft.Json.JsonProperty("namespace")]
+   public string Namespace { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "Identified")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
