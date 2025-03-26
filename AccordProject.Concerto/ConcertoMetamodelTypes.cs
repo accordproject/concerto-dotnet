@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-namespace AccordProject.Concerto.Metamodel;
+namespace AccordProject.Concerto;
 using AccordProject.Concerto;
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "Position")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -101,6 +101,14 @@ public class Decorator : Concept {
    public DecoratorLiteral?[] Arguments { get; set; }
    [Newtonsoft.Json.JsonProperty("location")]
    public Range? Location { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DotNetNamespace")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class DotNetNamespace : Decorator {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.decorator@1.0.0.DotNetNamespace";
+   [Newtonsoft.Json.JsonProperty("namespace")]
+   public string Namespace { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "Identified")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -431,6 +439,16 @@ public class LongDomainValidator : Concept {
    [Newtonsoft.Json.JsonProperty("upper")]
    public long? Upper { get; set; }
 }
+[Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "AliasedType")]
+[Newtonsoft.Json.JsonConverter(typeof(ConcertoConverterNewtonsoft))]
+public class AliasedType : Concept {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.AliasedType";
+   [Newtonsoft.Json.JsonProperty("name")]
+   public string Name { get; set; }
+   [Newtonsoft.Json.JsonProperty("aliasedName")]
+   public string AliasedName { get; set; }
+}
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "Import")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
 public abstract class Import : Concept {
@@ -462,6 +480,8 @@ public class ImportTypes : Import {
    public override string _Class { get; } = "concerto.metamodel@1.0.0.ImportTypes";
    [Newtonsoft.Json.JsonProperty("types")]
    public string[] Types { get; set; }
+   [Newtonsoft.Json.JsonProperty("aliasedTypes")]
+   public AliasedType?[] AliasedTypes { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "Model")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
