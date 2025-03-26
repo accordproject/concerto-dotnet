@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <LangVersion>10.0</LangVersion>
+    <LangVersion>12.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <LangVersion>10.0</LangVersion>
+    <LangVersion>12.0</LangVersion>
   </PropertyGroup>
     <Target Name="WebPack" BeforeTargets="CoreCompile" DependsOnTargets="PrepareForBuild">
         <Exec Command="npm run build" WorkingDirectory="./concerto-validate" />

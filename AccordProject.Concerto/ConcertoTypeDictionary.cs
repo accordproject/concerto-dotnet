@@ -79,15 +79,28 @@ public class ConcertoTypeDictionary
 
     private void LoadTypesFromAssembly(Assembly assembly)
     {
-        var types = assembly.GetTypes().Where(type =>
-            type.IsClass
-            && typeof(Concept).IsAssignableFrom(type)
-            && type.GetCustomAttribute<TypeAttribute>() != null);
+        var types = GetLoadableTypes(assembly).Where(
+            type =>
+                type.IsClass
+                && typeof(Concept).IsAssignableFrom(type)
+                && type.GetCustomAttribute<TypeAttribute>() != null);
         foreach (var type in types)
         {
             var attribute = type.GetCustomAttribute<TypeAttribute>();
             var key = attribute!.ToType();
             entries.Add(key, type);
+        }
+    }
+
+    public IEnumerable<Type> GetLoadableTypes(Assembly assembly)
+    {
+        try
+        {
+            return assembly.GetTypes();
+        }
+        catch (ReflectionTypeLoadException e)
+        {
+            return e.Types.Where(t => t != null)!;
         }
     }
 }   
