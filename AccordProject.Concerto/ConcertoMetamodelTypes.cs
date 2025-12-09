@@ -47,6 +47,8 @@ public class TypeIdentifier : Concept {
    public string Name { get; set; }
    [Newtonsoft.Json.JsonProperty("namespace")]
    public string? Namespace { get; set; }
+   [Newtonsoft.Json.JsonProperty("resolvedName")]
+   public string? ResolvedName { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DecoratorLiteral")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -506,6 +508,8 @@ public class Models : Concept {
 public abstract class ScalarDeclaration : Declaration {
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "concerto.metamodel@1.0.0.ScalarDeclaration";
+   [Newtonsoft.Json.JsonProperty("namespace")]
+   public string? Namespace { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "BooleanScalar")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
