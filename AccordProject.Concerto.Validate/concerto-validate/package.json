@@ -21,6 +21,6 @@
     "syncpack": "14.0.0-alpha.32"
   },
   "dependencies": {
-    "@accordproject/concerto-core": "3.16.5"
+    "@accordproject/concerto-core": "3.19.6"
   }
 }
