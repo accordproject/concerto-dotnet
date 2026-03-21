@@ -15,6 +15,10 @@
 namespace AccordProject.Concerto;
 
 using System.Reflection;
+using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions; 
+
 
 /// <summary>
 /// This class represents a Concerto type, for example org.example@1.2.3.Foo.
@@ -145,4 +149,63 @@ public class ConcertoUtils
         }
         return FindIdentifierProperty(baseType);
     }
+
+    private static readonly Regex ID_REGEX = new Regex(
+        @"^(\p{Lu}|\p{Ll}|\p{Lt}|\p{Lm}|\p{Lo}|\p{Nl}|\$|_|\\u[0-9A-Fa-f]{4})(?:\p{Lu}|\p{Ll}|\p{Lt}|\p{Lm}|\p{Lo}|\p{Nl}|\$|_|\\u[0-9A-Fa-f]{4}|\p{Mn}|\p{Mc}|\p{Nd}|\p{Pc}|\u200C|\u200D)*$",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant
+    );
+
+    public static string NormalizeIdentifier(object? identifier, int truncateLength = -1)
+    {
+        if (identifier is null) return "null";
+        if (identifier is not string) throw new Exception("Unsupported identifier type");
+        var result = (string)identifier;
+        if (result.Length == 0) throw new Exception("Unexpected error: empty identifier");
+
+        result = Regex.Replace(result, @"^\p{Nd}", "_$0");
+
+        result = Regex.Replace(result, @"[-‐−.@#:;><|/\\]", "_");
+        result = Regex.Replace(result, @"\s", "_");
+        result = Regex.Replace(result, @"[\u200C\u200D]", "_");
+
+        result = Regex.Replace(result, @"(?:[\uD800-\uDBFF][\uDC00-\uDFFF])", m => EscapeCodePointPair(m.Value));
+
+        result = Regex.Replace(
+            result,
+            @"(?!\p{Lu}|\p{Ll}|\p{Lt}|\p{Lm}|\p{Lo}|\p{Nl}|\$|_|\p{Mn}|\p{Mc}|\p{Nd}|\p{Pc}|\u200C|\u200D|\\u[0-9A-Fa-f]{4})(.)",
+            m => EscapeCodePoints(m.Value),
+            RegexOptions.Singleline
+        );
+
+        result = Regex.Replace(result, @"[\uD800-\uDFFF]", m => EscapeCodePoints(m.Value));
+
+        if (truncateLength > 0 && result.Length >= truncateLength)
+        {
+            result = result[..truncateLength];
+        }
+
+        if (!ID_REGEX.IsMatch(result))
+        {
+            throw new Exception($"Unexpected error. Not able to escape identifier '{result}'.");
+        }
+
+        return result;
+    }
+
+    private static string EscapeCodePoints(string input)
+    {
+        var sb = new StringBuilder();
+        foreach (var rune in input.EnumerateRunes())
+        {
+            sb.Append('_');
+            sb.Append(rune.Value.ToString("x", CultureInfo.InvariantCulture));
+        }
+        return sb.ToString();
+    }
+
+    private static string EscapeCodePointPair(string pair)
+    {
+        var cp = char.ConvertToUtf32(pair, 0);
+        return "_" + cp.ToString("x", CultureInfo.InvariantCulture);
+    }   
 }
