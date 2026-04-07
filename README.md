@@ -95,10 +95,17 @@ using Concerto.Models.org.test;
 ## Running Tests
 
 ```sh
-  $ cd ConcertoJsonConverter.Tests
-  $ dotnet restore
-  $ dotnet build --configuration Release --no-restore
-  $ dotnet test --no-restore --verbosity normal
+  # Core library and introspection tests
+  $ dotnet test AccordProject.Concerto.Tests/AccordProject.Concerto.Tests.csproj --nologo -v q
+
+  # Representative converter tests
+  $ dotnet test ConcertoJsonConverter.Tests/ConcertoJsonConverter.Tests.csproj --nologo -v q
+
+  # Strict core build
+  $ dotnet build AccordProject.Concerto/AccordProject.Concerto.csproj --nologo -v q
+
+  # Validate project tests (requires Node/npm in PATH for npm run build)
+  $ dotnet test AccordProject.Concerto.Validate.Tests/AccordProject.Concerto.Validate.Tests.csproj --nologo -v q
 ```
 
 ## Limitations

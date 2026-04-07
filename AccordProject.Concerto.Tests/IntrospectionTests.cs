@@ -109,4 +109,56 @@ public class IntrospectionTests
         Assert.NotNull(localModelManager.GetType("org.accordproject.concerto.test@1.2.3.Employee"));
         Assert.NotNull(localModelManager.GetEnum("org.accordproject.concerto.test@1.2.3.Department"));
     }
+
+    [Fact]
+    public void ThrowsForUnknownClassDeclaration()
+    {
+        Assert.Throws<KeyNotFoundException>(() =>
+            modelManager.GetIntrospector().GetClassDeclaration("org.accordproject.concerto.test@1.2.3.DoesNotExist"));
+    }
+
+    [Fact]
+    public void ReturnsOwningModelFileFromDeclaration()
+    {
+        var declaration = modelManager.GetIntrospector().GetClassDeclaration("org.accordproject.concerto.test@1.2.3.Employee");
+        var modelFile = declaration.GetModelFile();
+
+        Assert.Equal("org.accordproject.concerto.test", modelFile.GetNamespace());
+        Assert.Equal("1.2.3", modelFile.GetVersion());
+        Assert.Contains(modelFile.GetClassDeclarations(), item => item.FullyQualifiedName == declaration.FullyQualifiedName);
+    }
+
+    [Fact]
+    public void ReturnsDecoratorsByName()
+    {
+        var declaration = modelManager.GetIntrospector().GetClassDeclaration("org.accordproject.concerto.test@1.2.3.Employee");
+        var classDecorator = declaration.GetDecorator("indexed");
+        var missingDecorator = declaration.GetDecorator("missing");
+        var propertyDecorator = declaration.GetProperty("employeeId")!.GetDecorator("searchable");
+
+        Assert.NotNull(classDecorator);
+        Assert.Equal("indexed", classDecorator!.Name);
+        Assert.Single(classDecorator.Arguments);
+        Assert.Equal("email", classDecorator.Arguments[0]);
+        Assert.Null(missingDecorator);
+        Assert.NotNull(propertyDecorator);
+        Assert.Equal("searchable", propertyDecorator!.Name);
+    }
+
+    [Fact]
+    public void ReturnsCompleteSuperTypeChain()
+    {
+        var manager = modelManager.GetIntrospector().GetClassDeclaration("org.accordproject.concerto.test@1.2.3.Manager");
+        var superTypes = manager.GetAllSuperTypeDeclarations().Select(item => item.FullyQualifiedName).ToArray();
+
+        Assert.Equal(
+            new[]
+            {
+                "org.accordproject.concerto.test@1.2.3.Employee",
+                "org.accordproject.concerto.test@1.2.3.Person",
+                "concerto@1.0.0.Participant",
+                "concerto@1.0.0.Concept",
+            },
+            superTypes);
+    }
 }
