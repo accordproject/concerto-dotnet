@@ -14,7 +14,7 @@
 
 namespace AccordProject.Concerto;
 
-[AttributeUsage(AttributeTargets.Class)]
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum)]
 public class TypeAttribute : Attribute
 {
     public string Namespace;
@@ -23,7 +23,8 @@ public class TypeAttribute : Attribute
 
     public ConcertoType ToType()
     {
-        return new ConcertoType() {
+        return new ConcertoType()
+        {
             Namespace = Namespace,
             Version = Version,
             Name = Name
@@ -35,4 +36,28 @@ public class TypeAttribute : Attribute
 public class IdentifierAttribute : Attribute
 {
 
+}
+
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
+public sealed class DecoratorAttribute : Attribute
+{
+    public DecoratorAttribute(string name, params object?[] arguments)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentException("Decorator name is required.", nameof(name));
+        }
+
+        Name = name;
+        Arguments = arguments ?? Array.Empty<object?>();
+    }
+
+    public string Name { get; }
+
+    public object?[] Arguments { get; }
+}
+
+[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+public sealed class RelationshipAttribute : Attribute
+{
 }

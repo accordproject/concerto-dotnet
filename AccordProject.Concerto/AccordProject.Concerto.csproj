@@ -9,6 +9,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <LangVersion>12</LangVersion>
+    <RunCodegenOnBuild Condition="'$(RunCodegenOnBuild)' == ''">false</RunCodegenOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +21,7 @@
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 
-  <Target Name="Codegen" BeforeTargets="PreBuildEvent">
+  <Target Name="Codegen" BeforeTargets="PreBuildEvent" Condition="'$(RunCodegenOnBuild)' == 'true'">
     <Exec Command="bash scripts/codegen.sh" />
   </Target>
 
