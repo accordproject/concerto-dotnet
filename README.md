@@ -104,7 +104,7 @@ using Concerto.Models.org.test;
   # Strict core build
   $ dotnet build AccordProject.Concerto/AccordProject.Concerto.csproj --nologo -v q
 
-  # Validate project tests (requires Node/npm in PATH for npm run build)
+  # Validation tests (pure C#, no external dependencies)
   $ dotnet test AccordProject.Concerto.Validate.Tests/AccordProject.Concerto.Validate.Tests.csproj --nologo -v q
 ```
 

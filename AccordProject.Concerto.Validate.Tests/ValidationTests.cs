@@ -1,64 +1,38 @@
-﻿using Microsoft.ClearScript.V8;
-using AccordProject.Concerto.Validate;
-using Jering.Javascript.NodeJS;
-using Microsoft.Extensions.DependencyInjection;
-using AccordProject.Concerto.Validate.concertovalidate;
-
 namespace AccordProject.Concerto.Validate.Tests;
 
 public class ValidationTests
 {
-
     [Fact]
-    public async void GivenValidModelWhenValidateCalledThenIsValidShouldBeTrue()
+    public async Task GivenValidModelWhenValidateCalledThenIsValidShouldBeTrue()
     {
-
         var model = File.ReadAllText("Fixtures/testModelAST.json");
         var instance = File.ReadAllText("Fixtures/testInstanceValid.json");
-        var services = new ServiceCollection();
-        services.AddNodeJS();
-        ServiceProvider serviceProvider = services.BuildServiceProvider();
-        INodeJSService nodeJSService = serviceProvider.GetRequiredService<INodeJSService>();
-        
 
-        var validator = new Validator(nodeJSService);
-        String[] models = { model };
+        var validator = new Validator();
         var options = new ValidationOptions { EnableMapType = true, Strict = true };
-        var result =await validator.Validate(models, instance, options);
-        Assert.True(result.IsValid);
+        var result = await validator.Validate([model], instance, options);
+        Assert.True(result.IsValid, result.ErrorMessage);
     }
 
     [Fact]
-    public async void GivenInvalidModelWhenValidateCalledThenIsValidShouldBeFalseAndMessageShouldBePresent()
+    public async Task GivenInvalidModelWhenValidateCalledThenIsValidShouldBeFalseAndMessageShouldBePresent()
     {
-
         var model = File.ReadAllText("Fixtures/testModelAST.json");
         var instance = File.ReadAllText("Fixtures/testInstanceInvalid.json");
-        var services = new ServiceCollection();
-        services.AddNodeJS();
-        ServiceProvider serviceProvider = services.BuildServiceProvider();
-        INodeJSService nodeJSService = serviceProvider.GetRequiredService<INodeJSService>();
 
-
-        var validator = new Validator(nodeJSService);
-        String[] models = { model };
+        var validator = new Validator();
         var options = new ValidationOptions { EnableMapType = true, Strict = true };
-        var result = await validator.Validate(models, instance, options);
+        var result = await validator.Validate([model], instance, options);
         Assert.False(result.IsValid);
-        Assert.NotEmpty(result.ErrorMessage);
+        Assert.NotEmpty(result.ErrorMessage!);
     }
 
     [Fact]
-    public async void GivenObjectReturnListOfTypes()
+    public async Task GivenObjectReturnListOfTypes()
     {
         var instance = File.ReadAllText("Fixtures/testInstanceWithImports.json");
-        var services = new ServiceCollection();
-        services.AddNodeJS();
-        ServiceProvider serviceProvider = services.BuildServiceProvider();
-        INodeJSService nodeJSService = serviceProvider.GetRequiredService<INodeJSService>();
 
-
-        var validator = new Validator(nodeJSService);
+        var validator = new Validator();
         var result = await validator.GeAllReferencedNamespaces(instance);
 
         Assert.NotEmpty(result);
