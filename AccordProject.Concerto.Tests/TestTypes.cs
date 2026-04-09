@@ -13,10 +13,13 @@
  */
 
 namespace AccordProject.Concerto.Tests;
+
 using AccordProject.Concerto;
 [AccordProject.Concerto.Type(Namespace = "org.accordproject.concerto.test", Version = "1.2.3", Name = "Person")]
+[Decorator("indexed", "email")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
-public abstract class Person : Participant {
+public abstract class Person : Participant
+{
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "org.accordproject.concerto.test@1.2.3.Person";
    [Newtonsoft.Json.JsonProperty("email")]
@@ -26,29 +29,35 @@ public abstract class Person : Participant {
    [Newtonsoft.Json.JsonProperty("lastName")]
    public string LastName { get; set; }
 }
+[AccordProject.Concerto.Type(Namespace = "org.accordproject.concerto.test", Version = "1.2.3", Name = "Department")]
 [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-public enum Department {
-      MARKETING,
-      SALES,
-      ENGINEERING,
-      OPERATIONS,
+public enum Department
+{
+   MARKETING,
+   SALES,
+   ENGINEERING,
+   OPERATIONS,
 }
 [AccordProject.Concerto.Type(Namespace = "org.accordproject.concerto.test", Version = "1.2.3", Name = "Employee")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
-public class Employee : Person {
+public class Employee : Person
+{
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "org.accordproject.concerto.test@1.2.3.Employee";
    [Newtonsoft.Json.JsonProperty("department")]
    public Department? Department { get; set; }
+   [Relationship]
    [Newtonsoft.Json.JsonProperty("manager")]
    public Employee Manager { get; set; }
    [AccordProject.Concerto.Identifier()]
+   [Decorator("searchable")]
    [Newtonsoft.Json.JsonProperty("employeeId")]
    public string EmployeeId { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "org.accordproject.concerto.test", Version = "1.2.3", Name = "Manager")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
-public class Manager : Employee {
+public class Manager : Employee
+{
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "org.accordproject.concerto.test@1.2.3.Manager";
    [Newtonsoft.Json.JsonProperty("budget")]
@@ -56,7 +65,8 @@ public class Manager : Employee {
 }
 [AccordProject.Concerto.Type(Namespace = "org.accordproject.concerto.test", Version = "1.2.3", Name = "Project")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
-public class Project : Concept {
+public class Project : Concept
+{
    [Newtonsoft.Json.JsonProperty("$class")]
    public override string _Class { get; } = "org.accordproject.concerto.test@1.2.3.Project";
 }

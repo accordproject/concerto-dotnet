@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccordProject.Concerto.Tests", "AccordProject.Concerto.Tests.csproj", "{07CEBE5A-671F-24C7-E17B-E2CFB484076C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07CEBE5A-671F-24C7-E17B-E2CFB484076C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07CEBE5A-671F-24C7-E17B-E2CFB484076C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07CEBE5A-671F-24C7-E17B-E2CFB484076C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07CEBE5A-671F-24C7-E17B-E2CFB484076C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6137DF9-4BF6-4B2D-AE72-6F0D7CCDB814}
+	EndGlobalSection
+EndGlobal

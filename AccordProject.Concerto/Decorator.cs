@@ -1,1 +1,0 @@
-﻿namespace AccordProject.Concerto.Decorator;

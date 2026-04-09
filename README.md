@@ -16,6 +16,32 @@ This is a prototype implementation of the [Concerto Schema Language](https://doc
 
 This repository contains:
 - Serialization and Deserialization utilities for `System.Text.Json` and `Newtonsoft.Json`.
+- Native reflection-backed model introspection for registered Concerto .NET types.
+
+## Model Introspection
+
+`AccordProject.Concerto.ModelManager` now provides a .NET-native introspection surface for generated Concerto classes, aligned with the TypeScript `ModelManager` and `Introspector` APIs for common discovery tasks.
+
+```csharp
+using AccordProject.Concerto;
+
+var modelManager = new ModelManager();
+var introspector = modelManager.GetIntrospector();
+var employee = introspector.GetClassDeclaration("org.accordproject.concerto.test@1.2.3.Employee");
+
+var namespaces = modelManager.GetNamespaces();
+var modelFile = modelManager.GetModelFile("org.accordproject.concerto.test");
+var properties = employee.GetProperties();
+var managerProperty = employee.GetProperty("manager");
+var subclasses = employee.GetAssignableClassDeclarations();
+```
+
+The reflection layer supports:
+- Namespace and model file discovery.
+- Class and enum declaration lookup by fully qualified name.
+- Own and inherited property introspection.
+- Super-type and subclass navigation.
+- Identifier, relationship, enum, optionality, and decorator metadata.
 
 ## Basic Usage
 
@@ -69,10 +95,17 @@ using Concerto.Models.org.test;
 ## Running Tests
 
 ```sh
-  $ cd ConcertoJsonConverter.Tests
-  $ dotnet restore
-  $ dotnet build --configuration Release --no-restore
-  $ dotnet test --no-restore --verbosity normal
+  # Core library and introspection tests
+  $ dotnet test AccordProject.Concerto.Tests/AccordProject.Concerto.Tests.csproj --nologo -v q
+
+  # Representative converter tests
+  $ dotnet test ConcertoJsonConverter.Tests/ConcertoJsonConverter.Tests.csproj --nologo -v q
+
+  # Strict core build
+  $ dotnet build AccordProject.Concerto/AccordProject.Concerto.csproj --nologo -v q
+
+  # Validate project tests (requires Node/npm in PATH for npm run build)
+  $ dotnet test AccordProject.Concerto.Validate.Tests/AccordProject.Concerto.Validate.Tests.csproj --nologo -v q
 ```
 
 ## Limitations
