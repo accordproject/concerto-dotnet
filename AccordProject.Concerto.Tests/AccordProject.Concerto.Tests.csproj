@@ -6,7 +6,6 @@
     <Nullable>enable</Nullable>
     <LangVersion>12</LangVersion>
     <IsPackable>false</IsPackable>
-    <RunCodegenOnBuild Condition="'$(RunCodegenOnBuild)' == ''">false</RunCodegenOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,9 +26,5 @@
   <ItemGroup>
     <ProjectReference Include="..\AccordProject.Concerto\AccordProject.Concerto.csproj" />
   </ItemGroup>
-
-  <Target Name="Codegen" BeforeTargets="PreBuildEvent" Condition="'$(RunCodegenOnBuild)' == 'true'">
-    <Exec Command="bash scripts/codegen.sh" />
-  </Target>
 
 </Project>
