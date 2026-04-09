@@ -103,9 +103,6 @@ using Concerto.Models.org.test;
 
   # Strict core build
   $ dotnet build AccordProject.Concerto/AccordProject.Concerto.csproj --nologo -v q
-
-  # Validation tests (pure C#, no external dependencies)
-  $ dotnet test AccordProject.Concerto.Validate.Tests/AccordProject.Concerto.Validate.Tests.csproj --nologo -v q
 ```
 
 ## Limitations
