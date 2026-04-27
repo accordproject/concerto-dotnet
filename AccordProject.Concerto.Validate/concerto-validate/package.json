@@ -15,12 +15,12 @@
   "devDependencies": {
     "ts-loader": "9.5.1",
     "typescript": "5.3.3",
-    "webpack": "5.89.0",
+    "webpack": "5.106.2",
     "webpack-cli": "5.1.4",
     "lockfile-lint": "4.14.1",
     "syncpack": "14.0.0-alpha.32"
   },
   "dependencies": {
-    "@accordproject/concerto-core": "3.16.5"
+    "@accordproject/concerto-core": "3.26.0"
   }
 }
