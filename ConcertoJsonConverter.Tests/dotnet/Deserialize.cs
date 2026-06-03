@@ -14,7 +14,6 @@
 
 using System;
 using Xunit;
-using ExpectedObjects;
 using Concerto.Serialization;
 using Concerto.Models.org.test;
 using System.Text.Json;
@@ -47,17 +46,15 @@ public class Deserialize
             ""$identifier"": ""test@example.com""
         }";
 
-        var employee = JsonSerializer.Deserialize<Employee>(jsonString, options).ToExpectedObject();
+        var employee = JsonSerializer.Deserialize<Employee>(jsonString, options);
 
-        employee.ShouldEqual(new Employee()
-        {
-            firstName = "Matt",
-            lastName = "Roberts",
-            email = "test@example.com",
-            _identifier = "test@example.com",
-            department = Department.ENGINEERING,
-            employeeId = "123"
-        });
+        Assert.NotNull(employee);
+        Assert.Equal("Matt", employee!.firstName);
+        Assert.Equal("Roberts", employee.lastName);
+        Assert.Equal("test@example.com", employee.email);
+        Assert.Equal("test@example.com", employee._identifier);
+        Assert.Equal(Department.ENGINEERING, employee.department);
+        Assert.Equal("123", employee.employeeId);
     }
 
     [Fact]
@@ -75,22 +72,20 @@ public class Deserialize
         }";
 
         Employee employee = JsonSerializer.Deserialize<Employee>(jsonString, options);
-        
+
         Assert.Equal(employee.GetType(), typeof(Manager));
 
-        employee.ToExpectedObject().ShouldEqual(new Manager()
-        {
-            firstName = "Matt",
-            lastName = "Roberts",
-            email = "test@example.com",
-            _identifier = "test@example.com",
-            department = Department.ENGINEERING,
-            employeeId = "123",
-            budget = 1
-        });
+        Assert.Equal("Matt", employee.firstName);
+        Assert.Equal("Roberts", employee.lastName);
+        Assert.Equal("test@example.com", employee.email);
+        Assert.Equal("test@example.com", employee._identifier);
+        Assert.Equal(Department.ENGINEERING, employee.department);
+        Assert.Equal("123", employee.employeeId);
+        var typedManager = (Manager)employee;
+        Assert.Equal(1, typedManager.budget);
 
         // Should not throw
-        Manager manager = (Manager) employee;
+        Manager manager = (Manager)employee;
     }
 
     [Fact]
@@ -101,7 +96,7 @@ public class Deserialize
         }";
 
         var ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Employee>(jsonString, options));
- 
+
         Assert.Equal("Type definition `org.test.Foo` not found.", ex.Message);
     }
 
@@ -111,7 +106,7 @@ public class Deserialize
         string jsonString = "true";
 
         var ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Employee>(jsonString, options));
- 
+
         Assert.Equal("Only JSON Objects can be deserialized with ConcertoConverter.", ex.Message);
     }
 
@@ -128,7 +123,7 @@ public class Deserialize
         }";
 
         var ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Employee>(jsonString, options));
- 
+
         Assert.Equal("JSON Object is missing `$class` property.", ex.Message);
     }
 
@@ -154,24 +149,21 @@ public class Deserialize
             ""$identifier"": ""test@example.com""
         }";
 
-        var employee = JsonSerializer.Deserialize<Employee>(jsonStringWithManager, options).ToExpectedObject();
-        
-        employee.ShouldEqual(new Employee()
-        {
-            firstName = "Matt",
-            lastName = "Roberts",
-            email = "test@example.com",
-            _identifier = "test@example.com",
-            department = Department.ENGINEERING,
-            employeeId = "123",
-            manager = new Employee(){
-                email = "test@example.com",
-                _identifier = "test@example.com",
-                employeeId = "456",
-                firstName = "Martin",
-                lastName = "Halford",
-            }
-        });
+        var employee = JsonSerializer.Deserialize<Employee>(jsonStringWithManager, options);
+
+        Assert.NotNull(employee);
+        Assert.Equal("Matt", employee!.firstName);
+        Assert.Equal("Roberts", employee.lastName);
+        Assert.Equal("test@example.com", employee.email);
+        Assert.Equal("test@example.com", employee._identifier);
+        Assert.Equal(Department.ENGINEERING, employee.department);
+        Assert.Equal("123", employee.employeeId);
+        Assert.NotNull(employee.manager);
+        Assert.Equal("test@example.com", employee.manager!.email);
+        Assert.Equal("test@example.com", employee.manager._identifier);
+        Assert.Equal("456", employee.manager.employeeId);
+        Assert.Equal("Martin", employee.manager.firstName);
+        Assert.Equal("Halford", employee.manager.lastName);
     }
 
     // Not yet implemented
@@ -184,7 +176,7 @@ public class Deserialize
     //     }";
 
     //      var ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Employee>(jsonString, options));
- 
+
     //     Assert.Equal("JSON Object is missing `$class` property.", ex.Message);
 
     // }

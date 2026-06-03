@@ -35,17 +35,15 @@ public class ConcertoConverterNewtonsoftDeserializeTests
             ""$identifier"": ""test@example.com""
         }";
 
-        var employee = JsonConvert.DeserializeObject<Employee>(jsonString).ToExpectedObject();
+        var employee = JsonConvert.DeserializeObject<Employee>(jsonString);
 
-        employee.ShouldEqual(new Employee()
-        {
-            FirstName = "Matt",
-            LastName = "Roberts",
-            Email = "test@example.com",
-            _Identifier = "test@example.com",
-            Department = Department.ENGINEERING,
-            EmployeeId = "123"
-        });
+        Assert.NotNull(employee);
+        Assert.Equal("Matt", employee!.FirstName);
+        Assert.Equal("Roberts", employee.LastName);
+        Assert.Equal("test@example.com", employee.Email);
+        Assert.Equal("test@example.com", employee._Identifier);
+        Assert.Equal(Department.ENGINEERING, employee.Department);
+        Assert.Equal("123", employee.EmployeeId);
     }
 
     [Fact]
@@ -62,22 +60,19 @@ public class ConcertoConverterNewtonsoftDeserializeTests
             ""$identifier"": ""test@example.com""
         }";
 
-        Manager employee = (Manager) JsonConvert.DeserializeObject<Employee>(jsonString);
-        
+        Manager employee = (Manager)JsonConvert.DeserializeObject<Employee>(jsonString);
 
-        employee.ToExpectedObject().ShouldEqual(new Manager()
-        {
-            FirstName = "Matt",
-            LastName = "Roberts",
-            Email = "test@example.com",
-            _Identifier = "test@example.com",
-            Department = Department.ENGINEERING,
-            EmployeeId = "123",
-            Budget = 1
-        });
+
+        Assert.Equal("Matt", employee.FirstName);
+        Assert.Equal("Roberts", employee.LastName);
+        Assert.Equal("test@example.com", employee.Email);
+        Assert.Equal("test@example.com", employee._Identifier);
+        Assert.Equal(Department.ENGINEERING, employee.Department);
+        Assert.Equal("123", employee.EmployeeId);
+        Assert.Equal(1, employee.Budget);
 
         // Should not throw
-        Manager manager = (Manager) employee;
+        Manager manager = (Manager)employee;
     }
 
     [Fact]
@@ -88,7 +83,7 @@ public class ConcertoConverterNewtonsoftDeserializeTests
         }";
 
         var ex = Assert.Throws<JsonException>(() => JsonConvert.DeserializeObject<Employee>(jsonString));
- 
+
         Assert.Equal("Type definition `org.accordproject.concerto.test@1.2.3.Foo` not found.", ex.Message);
     }
 
@@ -115,7 +110,7 @@ public class ConcertoConverterNewtonsoftDeserializeTests
         }";
 
         var ex = Assert.Throws<JsonException>(() => JsonConvert.DeserializeObject<Employee>(jsonString));
- 
+
         Assert.Equal("JSON Object is missing `$class` property.", ex.Message);
     }
 
@@ -141,24 +136,21 @@ public class ConcertoConverterNewtonsoftDeserializeTests
             ""$identifier"": ""test@example.com""
         }";
 
-        var employee = JsonConvert.DeserializeObject<Employee>(jsonStringWithManager).ToExpectedObject();
-        
-        employee.ShouldEqual(new Employee()
-        {
-            FirstName = "Matt",
-            LastName = "Roberts",
-            Email = "test@example.com",
-            _Identifier = "test@example.com",
-            Department = Department.ENGINEERING,
-            EmployeeId = "123",
-            Manager = new Employee(){
-                Email = "test@example.com",
-                _Identifier = "test@example.com",
-                EmployeeId = "456",
-                FirstName = "Martin",
-                LastName = "Halford",
-            }
-        });
+        var employee = JsonConvert.DeserializeObject<Employee>(jsonStringWithManager);
+
+        Assert.NotNull(employee);
+        Assert.Equal("Matt", employee!.FirstName);
+        Assert.Equal("Roberts", employee.LastName);
+        Assert.Equal("test@example.com", employee.Email);
+        Assert.Equal("test@example.com", employee._Identifier);
+        Assert.Equal(Department.ENGINEERING, employee.Department);
+        Assert.Equal("123", employee.EmployeeId);
+        Assert.NotNull(employee.Manager);
+        Assert.Equal("test@example.com", employee.Manager!.Email);
+        Assert.Equal("test@example.com", employee.Manager._Identifier);
+        Assert.Equal("456", employee.Manager.EmployeeId);
+        Assert.Equal("Martin", employee.Manager.FirstName);
+        Assert.Equal("Halford", employee.Manager.LastName);
     }
 
     // Not yet implemented
@@ -171,7 +163,7 @@ public class ConcertoConverterNewtonsoftDeserializeTests
     //     }";
 
     //      var ex = Assert.Throws<JsonException>(() => JsonConvert.DeserializeObject<Employee>(jsonString));
- 
+
     //     Assert.Equal("JSON Object is missing `$class` property.", ex.Message);
 
     // }

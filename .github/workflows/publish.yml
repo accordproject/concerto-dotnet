@@ -11,8 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x]
-        dotnet-version: ['8.0.x' ]
+        dotnet-version: ['8.0.x']
         os:
           - ubuntu-latest
           # - windows-latest
@@ -33,7 +32,6 @@ jobs:
         run: |
           dotnet restore AccordProject.Concerto.sln
           dotnet restore ConcertoJsonConverter.sln
-          cd AccordProject.Concerto.Validate/concerto-validate && npm ci
       - name: Build
         run: |
           dotnet build AccordProject.Concerto.sln --configuration Release --no-restore
@@ -48,4 +46,3 @@ jobs:
       - name: Nuget Push
         run: |
           dotnet nuget push AccordProject.Concerto/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_KEY }}
-

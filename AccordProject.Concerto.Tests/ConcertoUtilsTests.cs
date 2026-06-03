@@ -23,31 +23,26 @@ public class ConcertoUtilsTests
     [Fact]
     public void CanParseUnversionedNamespace()
     {
-        var expected = new ConcertoNamespace() {
-            Namespace = "org.example",
-        }.ToExpectedObject();
         var actual = ConcertoUtils.ParseNamespace("org.example");
-        expected.ShouldEqual(actual);
+        Assert.Equal("org.example", actual.Namespace);
+        Assert.Null(actual.Version);
     }
 
     [Fact]
     public void CanParseVersionedNamespace()
     {
-        var expected = new ConcertoNamespace() {
-            Namespace = "org.example",
-            Version = "1.2.3"
-        }.ToExpectedObject();
         var actual = ConcertoUtils.ParseNamespace("org.example@1.2.3");
-        expected.ShouldEqual(actual);
+        Assert.Equal("org.example", actual.Namespace);
+        Assert.Equal("1.2.3", actual.Version);
     }
-         
+
     [Fact]
     public void CannotParseNamespaceWithEmptyNamespace()
     {
         var ex = Assert.Throws<Exception>(() => ConcertoUtils.ParseNamespace(""));
         Assert.Equal("Invalid namespace \"\"", ex.Message);
     }
-         
+
     [Fact]
     public void CannotParseNamespaceWithEmptyVersion()
     {
@@ -58,47 +53,42 @@ public class ConcertoUtilsTests
     [Fact]
     public void CanParseUnversionedType()
     {
-        var expected = new ConcertoType() {
-            Namespace = "org.example",
-            Name = "Foo"
-        }.ToExpectedObject();
         var actual = ConcertoUtils.ParseType("org.example.Foo");
-        expected.ShouldEqual(actual);
+        Assert.Equal("org.example", actual.Namespace);
+        Assert.Null(actual.Version);
+        Assert.Equal("Foo", actual.Name);
     }
 
     [Fact]
     public void CanParseVersionedType()
     {
-        var expected = new ConcertoType() {
-            Namespace = "org.example",
-            Version = "1.2.3",
-            Name = "Foo"
-        }.ToExpectedObject();
         var actual = ConcertoUtils.ParseType("org.example@1.2.3.Foo");
-        expected.ShouldEqual(actual);
+        Assert.Equal("org.example", actual.Namespace);
+        Assert.Equal("1.2.3", actual.Version);
+        Assert.Equal("Foo", actual.Name);
     }
-         
+
     [Fact]
     public void CannotParseTypeWithMissingPeriod()
     {
         var ex = Assert.Throws<Exception>(() => ConcertoUtils.ParseType("org"));
         Assert.Equal("Invalid fully qualified name \"org\"", ex.Message);
     }
-         
+
     [Fact]
     public void CannotParseTypeWithEmptyNamespace()
     {
         var ex = Assert.Throws<Exception>(() => ConcertoUtils.ParseType(".Foo"));
         Assert.Equal("Invalid fully qualified name \".Foo\"", ex.Message);
     }
-         
+
     [Fact]
     public void CannotParseTypeWithEmptyName()
     {
         var ex = Assert.Throws<Exception>(() => ConcertoUtils.ParseType("org.example."));
         Assert.Equal("Invalid fully qualified name \"org.example.\"", ex.Message);
     }
-         
+
     [Fact]
     public void CannotParseTypeWithEmptyVersion()
     {
@@ -123,7 +113,7 @@ public class ConcertoUtilsTests
     [Fact]
     public void HasIdentifierFalseForTypeWithoutIdentifier()
     {
-        var project = new Project() {};
+        var project = new Project() { };
         Assert.False(ConcertoUtils.HasIdentifier(project));
     }
 
@@ -144,10 +134,10 @@ public class ConcertoUtilsTests
     [Fact]
     public void GetIdentifierReturnsForTypeWithoutIdentifier()
     {
-        var project = new Project() {};
+        var project = new Project() { };
         Assert.Null(ConcertoUtils.GetIdentifier(project));
     }
-    
+
     [Fact]
     public void NormalizeIdentifier_NoOpValues()
     {

@@ -6,11 +6,9 @@
     <Nullable>enable</Nullable>
     <LangVersion>12</LangVersion>
     <IsPackable>false</IsPackable>
-    <RunCodegenOnBuild Condition="'$(RunCodegenOnBuild)' == ''">false</RunCodegenOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ExpectedObjects" Version="3.5.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="xunit" Version="2.9.3" />
@@ -27,9 +25,5 @@
   <ItemGroup>
     <ProjectReference Include="..\AccordProject.Concerto\AccordProject.Concerto.csproj" />
   </ItemGroup>
-
-  <Target Name="Codegen" BeforeTargets="PreBuildEvent" Condition="'$(RunCodegenOnBuild)' == 'true'">
-    <Exec Command="bash scripts/codegen.sh" />
-  </Target>
 
 </Project>
