@@ -376,6 +376,9 @@ namespace Concerto.Models.concerto.metamodel
       [JsonPropertyName("location")]
       [NewtonsoftJson.JsonProperty("location")]
       public Range? location { get; set; }
+      [JsonPropertyName("sizeValidator")]
+      [NewtonsoftJson.JsonProperty("sizeValidator")]
+      public CollectionSizeValidator? sizeValidator { get; set; }
    }
    [NewtonsoftJson.JsonConverter(typeof(NewtonsoftConcerto.ConcertoConverter))]
    public class RelationshipProperty : Property
@@ -458,6 +461,19 @@ namespace Concerto.Models.concerto.metamodel
       [JsonPropertyName("maxLength")]
       [NewtonsoftJson.JsonProperty("maxLength")]
       public int? MaxLength { get; set; }
+   }
+   [NewtonsoftJson.JsonConverter(typeof(NewtonsoftConcerto.ConcertoConverter))]
+   public class CollectionSizeValidator : Concept
+   {
+      [JsonPropertyName("$class")]
+      [NewtonsoftJson.JsonProperty("$class")]
+      public override string _class { get; } = "concerto.metamodel.CollectionSizeValidator";
+      [JsonPropertyName("minSize")]
+      [NewtonsoftJson.JsonProperty("minSize")]
+      public int? MinSize { get; set; }
+      [JsonPropertyName("maxSize")]
+      [NewtonsoftJson.JsonProperty("maxSize")]
+      public int? MaxSize { get; set; }
    }
    [NewtonsoftJson.JsonConverter(typeof(NewtonsoftConcerto.ConcertoConverter))]
    public class DoubleProperty : Property

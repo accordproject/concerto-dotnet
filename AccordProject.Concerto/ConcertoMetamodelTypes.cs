@@ -308,6 +308,8 @@ public abstract class Property : Concept {
    public Decorator?[] Decorators { get; set; }
    [Newtonsoft.Json.JsonProperty("location")]
    public Range? Location { get; set; }
+   [Newtonsoft.Json.JsonProperty("sizeValidator")]
+   public CollectionSizeValidator? SizeValidator { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "RelationshipProperty")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
@@ -372,6 +374,16 @@ public class StringLengthValidator : Concept {
    public int? MinLength { get; set; }
    [Newtonsoft.Json.JsonProperty("maxLength")]
    public int? MaxLength { get; set; }
+}
+[AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "CollectionSizeValidator")]
+[Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]
+public class CollectionSizeValidator : Concept {
+   [Newtonsoft.Json.JsonProperty("$class")]
+   public override string _Class { get; } = "concerto.metamodel@1.0.0.CollectionSizeValidator";
+   [Newtonsoft.Json.JsonProperty("minSize")]
+   public int? MinSize { get; set; }
+   [Newtonsoft.Json.JsonProperty("maxSize")]
+   public int? MaxSize { get; set; }
 }
 [AccordProject.Concerto.Type(Namespace = "concerto.metamodel", Version = "1.0.0", Name = "DoubleProperty")]
 [Newtonsoft.Json.JsonConverter(typeof(AccordProject.Concerto.ConcertoConverterNewtonsoft))]

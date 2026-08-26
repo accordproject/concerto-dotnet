@@ -15,14 +15,13 @@ export function validateInstance (
   options: ValidationOptions = {strict: true, enableMapType: true}
 ): void{
   const models = JSON.parse(jSonModels) as any[];
-  const modelManager = new ModelManager({ strict: options.strict, enableMapType: options.enableMapType });
+  const modelManager = new ModelManager();
   const modelFiles = models.map((item) => new ModelFile(modelManager, item));
   modelFiles.sort((a, b) => a.getNamespace().localeCompare(b.getNamespace()));
   modelManager.addModelFiles(modelFiles);
   
   try {
-    const factory = new Factory(modelManager);
-    const serializer = new Serializer(factory, modelManager);
+    const serializer = modelManager.getSerializer();
     const instance = JSON.parse(instanceJson)
     const resource = serializer.fromJSON(instance);
     callback(null, 
