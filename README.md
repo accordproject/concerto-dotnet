@@ -45,10 +45,34 @@ The reflection layer supports:
 
 ## Basic Usage
 
+### Newtonsoft.Json (published in AccordProject.Concerto)
+
+Use the converter from the published `AccordProject.Concerto` package:
+
+```csharp
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using AccordProject.Concerto;
+
+var settings = new JsonSerializerSettings
+{
+  Converters =
+  {
+    new StringEnumConverter(),
+    new ConcertoConverterNewtonsoft(),
+  }
+};
+```
+
+For backward compatibility, `Concerto.Serialization.Newtonsoft.ConcertoConverter`
+is also available as an alias.
+
+### System.Text.Json (published in AccordProject.Concerto)
+
 ```csharp
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Concerto.Serialization;
+using AccordProject.Concerto;
 using Concerto.Models.org.test;
  
 //...
@@ -59,7 +83,7 @@ using Concerto.Models.org.test;
         Converters =
         {
             new JsonStringEnumConverter(),
-            new ConcertoConverter(),
+          new ConcertoConverterFactorySystem(),
         }
     };
 
