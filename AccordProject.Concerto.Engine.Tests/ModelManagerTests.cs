@@ -137,38 +137,36 @@ public class ModelManagerTests
     }
 
     [Fact]
-    public void UnknownKeysAreRejectedWithStructuredDetailsUnderStrict()
+    public void UnknownKeysAreAlwaysRejectedWithStructuredDetails()
     {
         using var manager = LoadPeople();
         const string withTypo = """
         { "$class": "org.acme.hr@1.0.0.Person", "email": "grace@example.com", "name": "Grace Hopper", "adge": 85 }
         """;
 
-        // concerto-core rejects undeclared properties by default too...
-        var lenient = Assert.Throws<ConcertoException>(() => manager.ValidateOrThrow(withTypo));
-        Assert.Equal("Validation", lenient.Kind);
-        Assert.Empty(lenient.Details);
-
-        // ...but the accordproject/concerto#1273 strict preset adds structured details.
-        var strict = Assert.Throws<ConcertoException>(() => manager.ValidateOrThrow(withTypo, ValidationOptions.Strict));
-        Assert.Equal("Validation", strict.Kind);
-        var detail = Assert.Single(strict.Details);
+        // Validation is always strict (Concerto v5): no option is needed.
+        var ex = Assert.Throws<ConcertoException>(() => manager.ValidateOrThrow(withTypo));
+        Assert.Equal("Validation", ex.Kind);
+        var detail = Assert.Single(ex.Details);
         Assert.Equal("UNKNOWN_PROPERTY", detail.Code);
 
-        var report = manager.Validate(withTypo, ValidationOptions.Strict);
+        var report = manager.Validate(withTypo);
         Assert.Contains(report.Diagnostics, d => d.Pointer == "/adge" && d.Code == "UNDECLARED_FIELD");
     }
 
     [Fact]
-    public void RequiredNullIsRejectedUnderStrict()
+    public void RequiredNullIsAlwaysRejected()
     {
         using var manager = LoadPeople();
         const string withNull = """
         { "$class": "org.acme.hr@1.0.0.Person", "email": "grace@example.com", "name": null }
         """;
 
-        var ex = Assert.Throws<ConcertoException>(() => manager.ValidateOrThrow(withNull, ValidationOptions.Strict));
+        var ex = Assert.Throws<ConcertoException>(() => manager.ValidateOrThrow(withNull));
         Assert.Equal("TYPE_VIOLATION", Assert.Single(ex.Details).Code);
+
+        var report = manager.Validate(withNull);
+        Assert.Contains(report.Diagnostics, d => d.Pointer == "/name" && d.Code == "TYPE_VIOLATION");
     }
 
     [Fact]
@@ -233,7 +231,7 @@ public class ModelManagerTests
         using var manager = new ModelManager();
         manager.AddModels(File.ReadAllText("Fixtures/testModelAST.json"));
 
-        var report = manager.Validate(File.ReadAllText("Fixtures/testInstanceValid.json"), ValidationOptions.Strict);
+        var report = manager.Validate(File.ReadAllText("Fixtures/testInstanceValid.json"));
         Assert.True(report.IsValid);
     }
 
@@ -243,7 +241,7 @@ public class ModelManagerTests
         using var manager = new ModelManager();
         manager.AddModels(File.ReadAllText("Fixtures/testModelAST.json"));
 
-        var report = manager.Validate(File.ReadAllText("Fixtures/testInstanceInvalid.json"), ValidationOptions.Strict);
+        var report = manager.Validate(File.ReadAllText("Fixtures/testInstanceInvalid.json"));
         Assert.False(report.IsValid);
         var diagnostic = Assert.Single(report.Diagnostics);
         Assert.Equal("/value", diagnostic.Pointer);

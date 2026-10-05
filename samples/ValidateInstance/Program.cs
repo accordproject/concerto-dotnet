@@ -54,18 +54,19 @@ Console.WriteLine($"concerto-ffi {ModelManager.EngineVersion}");
 using var models = new ModelManager();
 models.AddModels(personModel);
 
-var instances = new (string Label, string Json, ValidationOptions? Options)[]
+var instances = new (string Label, string Json)[]
 {
-    ("valid", """{ "$class": "org.acme.hr@1.0.0.Person", "email": "ada@example.com", "name": "Ada Lovelace", "age": 36 }""", null),
-    ("wrong type", """{ "$class": "org.acme.hr@1.0.0.Person", "email": "grace@example.com", "name": 42 }""", null),
-    ("missing field", """{ "$class": "org.acme.hr@1.0.0.Person", "email": "grace@example.com" }""", null),
-    ("strict: null", """{ "$class": "org.acme.hr@1.0.0.Person", "email": "grace@example.com", "name": null }""", ValidationOptions.Strict),
+    ("valid", """{ "$class": "org.acme.hr@1.0.0.Person", "email": "ada@example.com", "name": "Ada Lovelace", "age": 36 }"""),
+    ("wrong type", """{ "$class": "org.acme.hr@1.0.0.Person", "email": "grace@example.com", "name": 42 }"""),
+    ("missing field", """{ "$class": "org.acme.hr@1.0.0.Person", "email": "grace@example.com" }"""),
+    ("required null", """{ "$class": "org.acme.hr@1.0.0.Person", "email": "grace@example.com", "name": null }"""),
 };
 
 // 1. Collect-all validation: a report of diagnostics, each with a JSON Pointer.
-foreach (var (label, json, options) in instances)
+//    Validation is always strict, as in Concerto v5.
+foreach (var (label, json) in instances)
 {
-    var report = models.Validate(json, options);
+    var report = models.Validate(json);
     Console.WriteLine($"{label,-14} valid={report.IsValid}");
     foreach (var d in report.Diagnostics)
     {

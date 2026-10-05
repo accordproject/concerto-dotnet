@@ -14,18 +14,13 @@
 
 namespace AccordProject.Concerto.Engine;
 
-/// <summary>How an instance is validated. Every option is off by default.</summary>
+/// <summary>
+/// How an instance is validated. Validation is always strict, as in Concerto
+/// v5: undeclared properties and required properties set to <c>null</c> are
+/// rejected. These options only relax how relationships are checked.
+/// </summary>
 public sealed record ValidationOptions
 {
-    /// <summary>The accordproject/concerto#1273 strict preset: unknown keys and required nulls are rejected.</summary>
-    public static ValidationOptions Strict { get; } = new() { RejectUnknownKeys = true, RejectRequiredNull = true };
-
-    /// <summary>A key the declaration does not declare is an error.</summary>
-    public bool RejectUnknownKeys { get; init; }
-
-    /// <summary>A required property explicitly set to <c>null</c> is an error.</summary>
-    public bool RejectRequiredNull { get; init; }
-
     /// <summary>A relationship property may hold a resource instead of a relationship URI.</summary>
     public bool PermitResourcesForRelationships { get; init; }
 

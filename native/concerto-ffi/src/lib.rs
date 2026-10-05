@@ -42,7 +42,7 @@ struct ErrorPayload {
     message: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     file_name: Option<String>,
-    /// The accordproject/concerto#1273 details of a strict-mode rejection.
+    /// The accordproject/concerto#1273 details of an unknown key or a required null.
     #[serde(skip_serializing_if = "Vec::is_empty")]
     details: Vec<DetailPayload>,
 }
@@ -170,29 +170,20 @@ unsafe fn manager<'a>(ptr: *const ConcertoModelManager) -> Result<&'a ModelManag
 // ---------------------------------------------------------------------------
 
 /// The .NET `ValidationOptions`, as camelCase JSON. Every field is optional.
+///
+/// There is no strict switch: Concerto v5 validation is always strict, so
+/// every call starts from [`ValidationOptions::STRICT`] (unknown keys and
+/// required nulls rejected, with accordproject/concerto#1273 details).
 #[derive(Deserialize, Default)]
 #[serde(rename_all = "camelCase", default)]
 struct OptionsPayload {
-    strict: bool,
-    reject_unknown_keys: Option<bool>,
-    reject_required_null: Option<bool>,
     permit_resources_for_relationships: bool,
     convert_resources_to_relationships: bool,
 }
 
 impl OptionsPayload {
     fn into_options(self) -> ValidationOptions {
-        let mut options = if self.strict {
-            ValidationOptions::STRICT
-        } else {
-            ValidationOptions::default()
-        };
-        if let Some(v) = self.reject_unknown_keys {
-            options.reject_unknown_keys = v;
-        }
-        if let Some(v) = self.reject_required_null {
-            options.reject_required_null = v;
-        }
+        let mut options = ValidationOptions::STRICT;
         options.permit_resources_for_relationships = self.permit_resources_for_relationships;
         options.convert_resources_to_relationships = self.convert_resources_to_relationships;
         options
@@ -201,7 +192,7 @@ impl OptionsPayload {
 
 unsafe fn options(ptr: *const c_char) -> Result<ValidationOptions, ErrorPayload> {
     if ptr.is_null() {
-        return Ok(ValidationOptions::default());
+        return Ok(OptionsPayload::default().into_options());
     }
     // SAFETY: forwarded from the caller.
     let text = unsafe { arg(ptr, "options") }?;
@@ -337,7 +328,7 @@ pub unsafe extern "C" fn concerto_model_manager_declaration_names(
 /// Validates a JSON instance and collects every violation
 /// (accordproject/concerto#1239). The envelope's value is
 /// `{"valid": bool, "diagnostics": [{pointer, code, severity, message, expected}]}`.
-/// `options_json` may be null for the default (lenient) options.
+/// `options_json` may be null for the default options.
 ///
 /// # Safety
 /// `ptr` must be a live handle; the strings NUL-terminated or (options) null.
@@ -365,7 +356,7 @@ pub unsafe extern "C" fn concerto_model_manager_check_instance(
 /// Validates a JSON instance and stops at the first violation, as
 /// `Serializer.fromJSON` does. The envelope is `{"ok":true,"value":null}` for
 /// a valid instance, and otherwise carries the engine's error, with the
-/// accordproject/concerto#1273 `details` of a strict-mode rejection.
+/// accordproject/concerto#1273 `details` of an unknown key or a required null.
 ///
 /// # Safety
 /// As [`concerto_model_manager_check_instance`].

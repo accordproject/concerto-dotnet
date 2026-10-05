@@ -37,9 +37,11 @@ foreach (var d in report.Diagnostics)
 }
 
 // First-error validation, as concerto-core's Serializer.fromJSON throws.
+// Validation is always strict (Concerto v5): unknown keys and required nulls
+// are rejected, with structured details.
 try
 {
-    models.ValidateOrThrow(instanceJson, ValidationOptions.Strict);
+    models.ValidateOrThrow(instanceJson);
 }
 catch (ConcertoException e) when (e.Kind == "Validation")
 {

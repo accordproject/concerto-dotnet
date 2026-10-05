@@ -43,7 +43,7 @@ public sealed class ConcertoException : Exception
     /// <summary>The model file the error is about, when there is one.</summary>
     public string? FileName { get; }
 
-    /// <summary>The structured violations of a strict-mode rejection (accordproject/concerto#1273).</summary>
+    /// <summary>The structured violations of an unknown key or a required null (accordproject/concerto#1273).</summary>
     public IReadOnlyList<ValidationDetail> Details { get; }
 }
 
