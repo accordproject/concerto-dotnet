@@ -1,0 +1,27 @@
+[package]
+name = "concerto-ffi"
+description = "C ABI over concerto-rust's concerto-core, for the .NET binding (AccordProject.Concerto.Engine)."
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+license = "Apache-2.0"
+publish = false
+
+# Standalone: not part of any parent workspace.
+[workspace]
+
+[lib]
+name = "concerto_ffi"
+crate-type = ["cdylib"]
+
+[dependencies]
+# The Rust engine from accordproject/concerto-rust#78 (integration branch
+# `claude/tender-pascal-ocwf9q`), pinned to a commit. Only the native,
+# non-`js-compat` surface (docs/public-api.md) is used.
+accordproject-concerto-core = { git = "https://github.com/accordproject/concerto-rust", rev = "67f7941f6945583f98ec1cc72df8fdad45e9c70e" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[profile.release]
+lto = true
+codegen-units = 1

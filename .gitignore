@@ -394,3 +394,6 @@ FodyWeavers.xsd
 *.DS_Store
 *.bak
 *dotnet-tools.json
+
+# Rust build output of the native engine binding
+native/**/target/
