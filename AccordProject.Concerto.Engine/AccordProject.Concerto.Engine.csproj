@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>12.0</LangVersion>
+    <!-- LibraryImport generates marshalling code that needs unsafe blocks. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <Description>Concerto for .NET, running on the concerto-rust engine through a native (C ABI) binding.</Description>
+  </PropertyGroup>
+
+  <!--
+    The native engine: native/concerto-ffi, a Rust cdylib over concerto-rust's
+    concerto-core. `dotnet build` runs cargo for the host platform and copies
+    the library next to the managed assembly (and so, transitively, into every
+    referencing project's output). Set ConcertoSkipCargo=true to use a library
+    you built yourself, at ConcertoNativeDir.
+  -->
+  <PropertyGroup>
+    <ConcertoFfiDir>$(MSBuildThisFileDirectory)..\native\concerto-ffi\</ConcertoFfiDir>
+    <ConcertoNativeDir Condition="'$(ConcertoNativeDir)' == ''">$(ConcertoFfiDir)target\release\</ConcertoNativeDir>
+    <ConcertoNativeLib Condition="$([MSBuild]::IsOSPlatform('Windows'))">concerto_ffi.dll</ConcertoNativeLib>
+    <ConcertoNativeLib Condition="$([MSBuild]::IsOSPlatform('OSX'))">libconcerto_ffi.dylib</ConcertoNativeLib>
+    <ConcertoNativeLib Condition="'$(ConcertoNativeLib)' == ''">libconcerto_ffi.so</ConcertoNativeLib>
+  </PropertyGroup>
+
+  <Target Name="BuildConcertoNative" BeforeTargets="AssignTargetPaths" Condition="'$(ConcertoSkipCargo)' != 'true'">
+    <Exec Command="cargo build --release --locked --manifest-path &quot;$(ConcertoFfiDir)Cargo.toml&quot;" />
+  </Target>
+
+  <Target Name="IncludeConcertoNative" BeforeTargets="AssignTargetPaths" AfterTargets="BuildConcertoNative">
+    <Error Condition="!Exists('$(ConcertoNativeDir)$(ConcertoNativeLib)')" Text="The concerto-ffi native library was not found at $(ConcertoNativeDir)$(ConcertoNativeLib). Build native/concerto-ffi with cargo, or unset ConcertoSkipCargo." />
+    <ItemGroup>
+      <None Include="$(ConcertoNativeDir)$(ConcertoNativeLib)" Link="$(ConcertoNativeLib)" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+    </ItemGroup>
+  </Target>
+
+</Project>

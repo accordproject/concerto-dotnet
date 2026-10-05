@@ -49,3 +49,36 @@ jobs:
           dotnet test ConcertoJsonConverter.sln --no-restore --verbosity normal
 
 
+
+  engine:
+    name: Native engine spike (concerto-rust)
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET Core SDK 8.0.x
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+
+      - name: Lint the native binding
+        working-directory: native/concerto-ffi
+        run: |
+          cargo fmt --check
+          cargo clippy --release --locked -- -D warnings
+
+      - name: Build and test
+        run: |
+          dotnet build AccordProject.Concerto.Engine.sln --configuration Release
+          dotnet test AccordProject.Concerto.Engine.sln --configuration Release --no-build --verbosity normal
+
+      - name: Run the sample
+        run: dotnet run --configuration Release --no-build --project samples/ValidateInstance
